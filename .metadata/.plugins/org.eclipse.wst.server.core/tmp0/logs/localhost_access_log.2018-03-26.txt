@@ -1,0 +1,7 @@
+127.0.0.1 - - [26/Mar/2018:20:36:31 -0700] "GET / HTTP/1.1" 404 1073
+0:0:0:0:0:0:0:1 - - [26/Mar/2018:20:36:33 -0700] "GET /proj2/homepage.jsp HTTP/1.1" 200 538
+0:0:0:0:0:0:0:1 - - [26/Mar/2018:20:36:33 -0700] "GET /proj2/homepageScripts.js HTTP/1.1" 200 257
+0:0:0:0:0:0:0:1 - - [26/Mar/2018:20:36:33 -0700] "GET /proj2/homepageStyle.css HTTP/1.1" 200 338
+0:0:0:0:0:0:0:1 - - [26/Mar/2018:20:36:41 -0700] "POST /proj2/ImageServer HTTP/1.1" 200 279879
+0:0:0:0:0:0:0:1 - - [26/Mar/2018:20:36:41 -0700] "GET /proj2/displayPageStyle.css HTTP/1.1" 200 1838
+0:0:0:0:0:0:0:1 - - [26/Mar/2018:20:36:41 -0700] "GET /proj2/displayPageScripts.js HTTP/1.1" 200 5505
