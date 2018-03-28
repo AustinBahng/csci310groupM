@@ -5,3 +5,9 @@
 0:0:0:0:0:0:0:1 - - [26/Mar/2018:20:36:41 -0700] "POST /proj2/ImageServer HTTP/1.1" 200 279879
 0:0:0:0:0:0:0:1 - - [26/Mar/2018:20:36:41 -0700] "GET /proj2/displayPageStyle.css HTTP/1.1" 200 1838
 0:0:0:0:0:0:0:1 - - [26/Mar/2018:20:36:41 -0700] "GET /proj2/displayPageScripts.js HTTP/1.1" 200 5505
+127.0.0.1 - - [26/Mar/2018:21:08:46 -0700] "GET /DevMgmt/ProductConfigDyn.xml HTTP/1.1" 404 1101
+127.0.0.1 - - [26/Mar/2018:21:08:46 -0700] "GET /DevMgmt/DiscoveryTree.xml HTTP/1.1" 404 1098
+127.0.0.1 - - [26/Mar/2018:21:36:52 -0700] "GET /DevMgmt/ProductConfigDyn.xml HTTP/1.1" 404 1101
+127.0.0.1 - - [26/Mar/2018:21:36:52 -0700] "GET /DevMgmt/DiscoveryTree.xml HTTP/1.1" 404 1098
+127.0.0.1 - - [26/Mar/2018:21:36:58 -0700] "GET /DevMgmt/ProductConfigDyn.xml HTTP/1.1" 404 1101
+127.0.0.1 - - [26/Mar/2018:21:36:58 -0700] "GET /DevMgmt/DiscoveryTree.xml HTTP/1.1" 404 1098
