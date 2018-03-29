@@ -19,11 +19,20 @@ import backend.Collage;
 import backend.CollageBuilder;
 
 public class CollageBuilderTest {
-
+	
+	@Test
+	public void testShapeCollage() {
+		CollageBuilder cb = new CollageBuilder();
+		List<BufferedImage> images = cb.getImageResults("dog");
+		BufferedImage collage = CollageBuilder.concatenation(images);
+		BufferedImage shapedCollage = cb.shapeCollage(collage, "dog");
+		assertNotSame(collage,shapedCollage);
+	}
+	
 	@Test
 	public void testValidCalculateSufficiecy() {
 		CollageBuilder cb = new CollageBuilder();
-        cb.buildCollage("test123");
+        cb.buildCollage("test123","dog");
         boolean valid = cb.calculateSufficiecy();
         assertTrue(valid);
 	}
@@ -31,7 +40,7 @@ public class CollageBuilderTest {
 	@Test
 	public void testInvalidCalculateSufficiecy() {
 		CollageBuilder cb = new CollageBuilder();
-        cb.buildCollage("asdfug3i17ga9we7fg3or899asdvuga7w3o8r7giuasef");
+        cb.buildCollage("asdfug3i17ga9we7fg3or899asdvuga7w3o8r7giuasef", "dog");
         boolean valid = cb.calculateSufficiecy();
         assertFalse(valid);
 	}
@@ -39,14 +48,14 @@ public class CollageBuilderTest {
 	@Test
 	public void testValidBuildCollage() {
 		 CollageBuilder cb = new CollageBuilder();
-		 Collage test = cb.buildCollage("dog");
+		 Collage test = cb.buildCollage("dog","dog");
 		 assertTrue(test.getDisplay());
 	}
 	
 	@Test
 	public void testInvalidBuildCollage() {
 		CollageBuilder cb = new CollageBuilder();
-		Collage test = cb.buildCollage("asdfuig2ior79iu73t9aosdufoogaowiurg23f3ougaef2jkasdhfiu");
+		Collage test = cb.buildCollage("asdfuig2ior79iu73t9aosdufoogaowiurg23f3ougaef2jkasdhfiu","dog");
 		assertFalse(test.getDisplay());
 	}
 
