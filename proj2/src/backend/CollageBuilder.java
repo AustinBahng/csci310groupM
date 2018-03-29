@@ -1,10 +1,15 @@
 package backend;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.font.FontRenderContext;
+import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -36,7 +41,7 @@ public class CollageBuilder {
 	}
 	
 	//builds the collage
-	public Collage buildCollage(String querry) {
+	public Collage buildCollage(String querry, String shape) {
 		//get json from google
 		List<BufferedImage> images = getImageResults(querry);
 		// set valid collage based on number of imgaes found
@@ -49,26 +54,57 @@ public class CollageBuilder {
 		//apply rotations and sizing to all images in list
         for (int i=0; i < images.size(); i++) {
         	System.out.println(i);
-            images.set(i, resize(images.get(i), 190, 175));
+            images.set(i, resize(images.get(i), 100, 75));
             images.set(i, addBorder(images.get(i), 3));
             images.set(i, rotate(images.get(i), generateRandomAngle()));
         }
         // compile all images into 1 image
         BufferedImage bufferedCollage = concatenation(images);
+        
+        bufferedCollage = shapeCollage(bufferedCollage, shape);
         // convert buffered image into byte array
         ByteArrayOutputStream baos;
         // construct collage to return
         Collage collage = null;
         try {
-        	System.out.println("Throw Exception");
 			baos = convertToBytes(bufferedCollage);
-			System.out.println("asdf");
 	        byte[] bytes = baos.toByteArray();
 	        collage = new Collage(querry,bytes,calculateSufficiecy());
 		} catch (IOException e) {
 			System.out.println("IOEXCEPTION WITH IMAGEIO.WRITE()");
 		}
         return collage;
+	}
+	
+	public BufferedImage shapeCollage(BufferedImage img, String shapeText) {
+		BufferedImage textCollage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = textCollage.createGraphics();
+		FontRenderContext frc = g.getFontRenderContext();
+		int textSize = (int) (Math.floor(img.getWidth() / (shapeText.length() + 1)) * 2);
+		System.out.println("font: " + textSize);
+		Font font = new Font(Font.SANS_SERIF, Font.BOLD, textSize);
+		GlyphVector gv = font.createGlyphVector(frc, shapeText);
+		Rectangle2D box = gv.getVisualBounds();
+		
+        int xOff = 25 - (int)box.getX();
+        int yOff = 80 - (int)box.getY();
+        Shape shape = gv.getOutline(xOff,yOff);
+        
+        g.setClip(shape);
+        g.drawImage(img,0,0,null);
+       
+        // can add border to letters
+        //g.setClip(null);
+        //g.setStroke(new BasicStroke(2f));
+        //g.setColor(Color.WHITE);
+        
+       // g.setRenderingHint(
+       //     RenderingHints.KEY_ANTIALIASING,
+       //     RenderingHints.VALUE_ANTIALIAS_ON);
+        g.draw(shape);
+
+        g.dispose();
+        return textCollage;
 	}
 	
 	public ByteArrayOutputStream convertToBytes(BufferedImage img) throws IOException{
@@ -82,15 +118,15 @@ public class CollageBuilder {
         BufferedImage resultCollage = new BufferedImage(750, 600, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = resultCollage.createGraphics();
         // set starting indexes
-        int x = -59;
-        int y = -63;
+        int x = 10;
+        int y = 45;
         // loop through each image and add it to collage, updating x and y every iterations
         for(int i = 0; i < images.size(); i++) {
         	g2d.drawImage(images.get(i),null,x,y);
-        	x += 125;
+        	x += 90;
         	if(x > 568) {
-        		y += 125;
-        		x = -57;
+        		y += 60;
+        		x = -30;
         	}
         }
         g2d.dispose();

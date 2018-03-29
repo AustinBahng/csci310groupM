@@ -25,7 +25,7 @@ public class BuildAnotherImageServer extends HttpServlet {
 		String querry = (String) request.getParameter("topic");
 
 		CollageBuilder cb = new CollageBuilder();
-		Collage collage = cb.buildCollage(querry);
+		Collage collage = cb.buildCollage(querry, "dog");
 
 		byte[] encoded = Base64.getEncoder().encode(collage.getImage());
 		String collageImageStr = new String(encoded);
