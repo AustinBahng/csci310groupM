@@ -1,0 +1,8 @@
+package backend;
+
+public class testMain {
+	public static void main(String[] args) {
+		CollageBuilder cb = new CollageBuilder();
+		Collage c = cb.buildCollage("dog");
+	}
+}

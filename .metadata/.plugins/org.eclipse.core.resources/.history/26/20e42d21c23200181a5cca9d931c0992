@@ -1,0 +1,35 @@
+package backend;
+
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+
+public class testMain {
+	public static void main(String[] args) {
+		CollageBuilder cb = new CollageBuilder();
+		List<BufferedImage> images = cb.getImageResults("dog");
+		for (int i=0; i < images.size(); i++) {
+        	System.out.println(i);
+            images.set(i, cb.resize(images.get(i), 190, 175));
+            images.set(i, cb.addBorder(images.get(i), 3));
+            images.set(i, cb.rotate(images.get(i), cb.generateRandomAngle()));
+        }
+		BufferedImage img = cb.concatenation(images);
+		File output = new File("test.png");
+		try {
+			ImageIO.write(img, "png", output);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		final BufferedImage textCollage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = textCollage.createGraphics();
+		FontRenderContext frc = g.getFontRenderContext()
+	}
+}
