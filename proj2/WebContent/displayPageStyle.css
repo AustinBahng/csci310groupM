@@ -12,13 +12,32 @@ input[type=submit]{
 	width: 110px;
 	height: 30px;
 	color: white;
-}
-input[type=text], [type=submit]{
 	font-size: 14px;
 }
-input[type=text]{
+
+input#inputBox{
 	height: 25px;
 	border: 2px solid #696969;
+	font-size: 14px;
+}
+
+input#inputBoxShape{
+	height: 25px;
+	border: 2px solid #696969;
+	font-size: 14px;
+}
+
+input#inputBoxWidth, #inputBoxHeight{
+	height: 25px;
+	width: 80px;
+	border: 2px solid #696969;
+	font-size: 14px;
+}
+
+input[type=text]{
+	border: 2px solid #696969;
+	font-size: 14px;
+	
 }
 #exportButton{
 	padding-right: 30px;
@@ -30,6 +49,7 @@ input[type=text]{
 	text-decoration: none;
 }
 #submitButton{
+	margin-top: 10px;
 	width: 160px;
 }
 div#export{
