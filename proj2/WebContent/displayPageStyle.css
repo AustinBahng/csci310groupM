@@ -47,17 +47,47 @@ input[type=text]{
 	background-color: #696969;
 	color: white;
 	text-decoration: none;
-}
-#submitButton{
-	margin-top: 10px;
-	width: 160px;
-}
-div#export{
+	
 	right: 15%;
 	margin-top: -52px;
 	position: absolute;
 	font-family: system-ui;
 }
+
+#exportButtonTemp{
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #696969;
+	color: white;
+	text-decoration: none;
+	
+	right: 15%;
+	margin-top: -52px;
+	position: absolute;
+	font-family: system-ui;
+}
+
+#saveButton{
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #696969;
+	color: white;
+	text-decoration: none;
+
+	left: 5%;
+	margin-top: -52px;
+	position: absolute;
+	font-family: system-ui;
+}
+#submitButton{
+	margin-top: 10px;
+	width: 160px;
+}
+
 div#newInput{
 	padding-top: 10px;
 	padding-bottom: 10px;

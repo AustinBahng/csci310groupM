@@ -22,12 +22,11 @@
 		<!-- header: contains the title and export button -->
 		<div id="header">
 			<h1 id="title">Collage for topic X</h1>
-			<div id="export">
-				<!-- <form name="export" id="export" method="POST" action="" enctype="multipart/form-data">
-					<input type="Submit" id="exportButton" name="export" value="Export" />
-				</form> -->
-				<a id="exportButton" onclick="prepareDownload()" download="test.jpeg" style="display:none">Export</a>
-			</div>
+			
+			<a id="saveButton">Save to History</a>
+			<a id="exportButtonTemp" download="test.jpeg" >Export</a>
+			<a id="exportButton" onclick="prepareDownload()" download="test.jpeg" style="display: none;">Export</a>
+			
 		</div>
 
 		<!-- mainSpace: contains either the main collage being displayed or the error msg -->
