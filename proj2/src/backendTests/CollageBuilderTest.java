@@ -24,7 +24,7 @@ public class CollageBuilderTest {
 	public void testShapeCollage() {
 		CollageBuilder cb = new CollageBuilder();
 		List<BufferedImage> images = cb.getImageResults("dog");
-		BufferedImage collage = CollageBuilder.concatenation(images);
+		BufferedImage collage = CollageBuilder.concatenation(images,3);
 		BufferedImage shapedCollage = cb.shapeCollage(collage, "dog");
 		assertNotSame(collage,shapedCollage);
 	}
@@ -63,7 +63,7 @@ public class CollageBuilderTest {
 	public void testConcatenation() {
 		CollageBuilder cb = new CollageBuilder();
 		List<BufferedImage> images = cb.getImageResults("dog");
-		BufferedImage collage = CollageBuilder.concatenation(images);
+		BufferedImage collage = CollageBuilder.concatenation(images,3);
 		assertNotNull(collage);
 	}
 

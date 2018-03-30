@@ -54,12 +54,13 @@ public class CollageBuilder {
 		//apply rotations and sizing to all images in list
         for (int i=0; i < images.size(); i++) {
         	System.out.println(i);
-            images.set(i, resize(images.get(i), 100, 75));
+            images.set(i, resize(images.get(i), 85, 50));
             images.set(i, addBorder(images.get(i), 3));
             images.set(i, rotate(images.get(i), generateRandomAngle()));
         }
+        System.out.println("SIZE OF IMAGE LIST: " + images.size());
         // compile all images into 1 image
-        BufferedImage bufferedCollage = concatenation(images);
+        BufferedImage bufferedCollage = concatenation(images,shape.length());
         
         bufferedCollage = shapeCollage(bufferedCollage, shape);
         // convert buffered image into byte array
@@ -80,16 +81,17 @@ public class CollageBuilder {
 		BufferedImage textCollage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = textCollage.createGraphics();
 		FontRenderContext frc = g.getFontRenderContext();
-		int textSize = (int) (Math.floor(img.getWidth() / (shapeText.length() + 1)) * 2);
+		int textSize = (int) (Math.floor(img.getWidth() / (shapeText.length() + 1.25)) * 2);
 		System.out.println("font: " + textSize);
 		Font font = new Font(Font.SANS_SERIF, Font.BOLD, textSize);
 		GlyphVector gv = font.createGlyphVector(frc, shapeText);
 		Rectangle2D box = gv.getVisualBounds();
-		
-        int xOff = 25 - (int)box.getX();
-        int yOff = 80 - (int)box.getY();
+		System.out.println("WIDTH OF TEXT: " + box.getWidth());
+        //int xOff = 300 - (int)box.getX();
+		int xOff = (int) (img.getWidth() / 2 - box.getWidth() / 2);
+        int yOff = 70 - (int)box.getY();
         Shape shape = gv.getOutline(xOff,yOff);
-        
+        System.out.println("xOff: " + xOff);
         g.setClip(shape);
         g.drawImage(img,0,0,null);
        
@@ -113,20 +115,26 @@ public class CollageBuilder {
 		return baos;
 	}
     
-    public static BufferedImage concatenation(List<BufferedImage> images) {
+    public static BufferedImage concatenation(List<BufferedImage> images, int textSize) {
     	// create collage image
-        BufferedImage resultCollage = new BufferedImage(750, 600, BufferedImage.TYPE_INT_RGB);
+        BufferedImage resultCollage = new BufferedImage(700, 600, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = resultCollage.createGraphics();
         // set starting indexes
-        int x = 10;
-        int y = 45;
+        int x = 50;
+        int y = 40;
+        if(textSize == 1) {
+        	x = 200;
+        }
         // loop through each image and add it to collage, updating x and y every iterations
         for(int i = 0; i < images.size(); i++) {
-        	g2d.drawImage(images.get(i),null,x,y);
-        	x += 90;
-        	if(x > 568) {
-        		y += 60;
-        		x = -30;
+        	g2d.drawImage(images.get(i), null, x, y);
+        	x += 55;
+        	if(x > 600) {
+        		y += 38;
+        		x = 50;
+        		if(textSize == 1) {
+        			x = 200;
+        		}
         	}
         }
         g2d.dispose();
@@ -141,10 +149,11 @@ public class CollageBuilder {
 		List<BufferedImage> imageResults = new ArrayList<BufferedImage>();
 		List<URL> resultLinks = new ArrayList<URL>();
 		List<HttpURLConnection> searchConnections = new ArrayList<HttpURLConnection>();
+		int numCalls = 10;
 		try {
 			// construct url for search api call
-			// each call gets 10 results, so make 3 calls
-			for(int i = 0; i < 3; i++) {
+			// each call gets 10 results
+			for(int i = 0; i < numCalls; i++) {
 				URL url = new URL("https://www.googleapis.com/customsearch/v1?key=" + key 
 				+ "&cx=" + id + "&q=" + searchTerms + "&searchType=image" + "&start=" + (i*10 + 1) + "&fields=items(link)");
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -154,13 +163,13 @@ public class CollageBuilder {
 			}
 			System.out.println("OPENED CONNECTIONS");
 			// setup input readers, have each connection open on a seperate thread
-			SearchThread[] searches = new SearchThread[3];
-			for(int i = 0; i < 3; i++) {
+			SearchThread[] searches = new SearchThread[numCalls];
+			for(int i = 0; i < numCalls; i++) {
 				searches[i] = new SearchThread(searchConnections.get(i));
 				searches[i].start();
 			}
 			// wait for each thread to finish before continueing
-			for(int i = 0; i < 3; i++) {
+			for(int i = 0; i < numCalls; i++) {
 				try {
 					searches[i].join();
 				} catch (InterruptedException e) {
@@ -169,16 +178,16 @@ public class CollageBuilder {
 				}
 			}
 			// add the image url results from each thread into 1 list
-			for(int i = 0; i < 3; i++) {
+			for(int i = 0; i < numCalls; i++) {
 				resultLinks.addAll(searches[i].getURLs());
 			}
 			
 			// setup up 10 threads to process 3 images each
 			int httpThreadCount = 10;
-			int subIndex = 30 / httpThreadCount;
+			int subIndex = numCalls;
 			System.out.println(resultLinks.size());
 			// if not enough image urls, just return a blank list
-			if(resultLinks.size() < 30) {
+			if(resultLinks.size() < (numCalls * 10)) {
 				return new ArrayList<BufferedImage>();
 			}
 			HttpConnectionThread[] connections = new HttpConnectionThread[httpThreadCount];
@@ -226,7 +235,7 @@ public class CollageBuilder {
 				httpcon.setConnectTimeout(500);
 				try {
 					BufferedImage img = ImageIO.read(httpcon.getInputStream());
-					if(imageResults.size() == 30) {
+					if(imageResults.size() == numCalls * 10) {
 						break;
 					}
 					imageResults.add(img);
@@ -305,18 +314,5 @@ public class CollageBuilder {
 		graph.dispose();
 		return frame;
     }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

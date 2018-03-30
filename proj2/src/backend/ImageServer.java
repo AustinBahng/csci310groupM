@@ -21,7 +21,7 @@ public class ImageServer extends HttpServlet {
 		String querry = (String) request.getParameter("topic");
 		// construct collage based on querry
 		CollageBuilder cb = new CollageBuilder();
-		Collage collage = cb.buildCollage(querry,"dog");
+		Collage collage = cb.buildCollage(querry,"Fight On");
 		// create session
 		HttpSession session = request.getSession(true);
 		// convert byte array into base 64 string

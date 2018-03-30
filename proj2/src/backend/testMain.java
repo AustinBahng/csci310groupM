@@ -26,7 +26,7 @@ public class testMain {
             images.set(i, cb.addBorder(images.get(i), 3));
             images.set(i, cb.rotate(images.get(i), cb.generateRandomAngle()));
         }
-		BufferedImage img = cb.concatenation(images);
+		BufferedImage img = cb.concatenation(images,3);
 		File output = new File("test.png");
 		
 		
