@@ -32,7 +32,7 @@ public class CollageBuilderTest {
 	@Test
 	public void testValidCalculateSufficiecy() {
 		CollageBuilder cb = new CollageBuilder();
-        cb.buildCollage("test123","dog");
+        cb.buildCollage("dog","dog");
         boolean valid = cb.calculateSufficiecy();
         assertTrue(valid);
 	}
@@ -70,8 +70,8 @@ public class CollageBuilderTest {
 	@Test
 	public void testValidGetImageResults() {
 		CollageBuilder cb = new CollageBuilder();
-		List<BufferedImage> test = cb.getImageResults("dog");
-		assertEquals(test.size(),30);
+		List<BufferedImage> test = cb.getImageResults("usc");
+		assertEquals(test.size(),100);
 	}
 	
 	@Test
@@ -124,28 +124,5 @@ public class CollageBuilderTest {
 		BufferedImage testImg = new BufferedImage(50,50,BufferedImage.TYPE_INT_ARGB);
 		BufferedImage testImg2 = CollageBuilder.addBorder(testImg, 5);
 		assertNotSame(testImg, testImg2);
-	}
-
-	@Test
-	public void testBuildCollageIOException() throws Exception{
-		/*CollageBuilder cb = new CollageBuilder();
-		
-		CollageBuilder cbMock = Mockito.mock(CollageBuilder.class);
-		//get json from google
-				List<BufferedImage> images = cb.getImageResults("dog");
-				//populate the collages list with 30 collage objects
-				//apply rotations and sizing to all images in list
-		        for (int i=0; i < images.size(); i++) {
-		        	System.out.println(i);
-		            images.set(i, CollageBuilder.resize(images.get(i), 190, 175));
-		            images.set(i, CollageBuilder.addBorder(images.get(i), 3));
-		            images.set(i, CollageBuilder.rotate(images.get(i), cb.generateRandomAngle()));
-		        }
-		        // compile all images into 1 image
-		        BufferedImage bufferedCollage = CollageBuilder.concatenation(images);
-		Mockito.when(cbMock.convertToBytes(bufferedCollage)).thenThrow(IOException.class);
-		cb.buildCollage("dog");*/
-		//final CollageBuilder cb = Mockito.spy(new CollageBuilder());
-		//Mockito.when(cb.convertToBytes(Mockito.any())).thenThrow(new IOException());
 	}
 }

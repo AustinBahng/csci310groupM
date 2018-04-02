@@ -8,20 +8,25 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/School/cs310/scollage/scollage/commons-io-2.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/School/cs310/scollage/scollage/gson-2.6.2.jar">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/byte-buddy-1.6.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/byte-buddy-agent-1.6.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/gson-2.6.2.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/School/cs310/scollage/scollage/javax.servlet-3.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/School/cs310/csci310groupM/proj2/byte-buddy-1.6.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/School/cs310/csci310groupM/proj2/byte-buddy-agent-1.6.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/School/cs310/csci310groupM/proj2/mockito-all-2.0.2-beta.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/School/cs310/csci310groupM/proj2/mockito-core-2.15.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/School/cs310/csci310groupM/proj2/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/School/cs310/csci310groupM/proj2/spring-2.0.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/School/cs310/csci310groupM/proj2/spring-mock-2.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/javax.servlet-3.1.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/mockito-all-2.0.2-beta.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/mockito-core-2.15.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/spring-2.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/spring-mock-2.0.6.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

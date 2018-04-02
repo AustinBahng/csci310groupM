@@ -23,9 +23,9 @@ public class BuildAnotherImageServer extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String querry = (String) request.getParameter("topic");
-
+		String shape = (String) request.getParameter("shape");
 		CollageBuilder cb = new CollageBuilder();
-		Collage collage = cb.buildCollage(querry, "dog");
+		Collage collage = cb.buildCollage(querry, shape);
 
 		byte[] encoded = Base64.getEncoder().encode(collage.getImage());
 		String collageImageStr = new String(encoded);

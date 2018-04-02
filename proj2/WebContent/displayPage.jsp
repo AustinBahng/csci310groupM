@@ -16,7 +16,7 @@
 	<meta charset="UTF-8">
 	<title>Build Another Collage</title>
 	<link rel="stylesheet" type="text/css" href="displayPageStyle.css">
-	<script src="displayPageScripts.js"></script>
+	<script src="displayScripts.js"></script>
 	</head>
 	<body onload="loadFirstContent('<%= collageTitle%>','<%= collageImage%>','<%= isError%>')" >
 		<!-- header: contains the title and export button -->

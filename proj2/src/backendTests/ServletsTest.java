@@ -24,6 +24,7 @@ public class ServletsTest {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		
 		request.addParameter("topic", "dog");
+		request.addParameter("shape", "dog");
 		
 		new ImageServer().service(request,response);
 		assertNull(response.getContentType());
@@ -35,6 +36,7 @@ public class ServletsTest {
 		MockHttpServletResponse response = new MockHttpServletResponse();
 		
 		request.addParameter("topic", "dog");
+		request.addParameter("shape", "dog");
 		
 		new BuildAnotherImageServer().service(request,response);
 		
