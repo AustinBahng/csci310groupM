@@ -1,14 +1,16 @@
 package backendTests;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
-
-import backend.HttpConnectionThread;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
+
+import backend.HttpConnectionThread;
 
 
 public class HttpConnectionThreadTest{	

@@ -123,7 +123,8 @@ public class CollageBuilder {
         int x = 50;
         int y = 40;
         if(textSize == 1) {
-        	x = 200;
+        	x = 170;
+        	y = 50;
         }
         // loop through each image and add it to collage, updating x and y every iterations
         for(int i = 0; i < images.size(); i++) {
@@ -133,7 +134,7 @@ public class CollageBuilder {
         		y += 38;
         		x = 50;
         		if(textSize == 1) {
-        			x = 200;
+        			x = 170;
         		}
         	}
         }
