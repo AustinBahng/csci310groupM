@@ -9,24 +9,71 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+<<<<<<< HEAD
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/csci310groupM/proj2/spring-mock-2.0.6.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/csci310groupM/proj2/spring-2.0.6.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/csci310groupM/proj2/mockito-core-2.15.6.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/csci310groupM/proj2/mockito-all-2.0.2-beta.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/csci310groupM/proj2/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/csci310groupM/proj2/javax.servlet-3.1.jar">
+=======
 	<classpathentry kind="lib" path="byte-buddy-1.6.5.jar"/>
 	<classpathentry kind="lib" path="byte-buddy-agent-1.6.5.jar"/>
 	<classpathentry kind="lib" path="commons-io-2.6.jar"/>
 	<classpathentry kind="lib" path="commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="gson-2.6.2.jar">
+>>>>>>> dd3d01b3bc6e10d5e74316d5c13025293c617aa9
+=======
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/byte-buddy-1.6.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/byte-buddy-agent-1.6.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/gson-2.6.2.jar">
+>>>>>>> parent of dd3d01b... Merge branch 'master' of github.com:AustinBahng/csci310groupM
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/csci310groupM/proj2/gson-2.6.2.jar">
+=======
 	<classpathentry kind="lib" path="javax.servlet-3.1.jar">
+>>>>>>> dd3d01b3bc6e10d5e74316d5c13025293c617aa9
+=======
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/javax.servlet-3.1.jar">
+>>>>>>> parent of dd3d01b... Merge branch 'master' of github.com:AustinBahng/csci310groupM
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/csci310groupM/proj2/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/csci310groupM/proj2/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/csci310groupM/proj2/byte-buddy-agent-1.6.5.jar"/>
+	<classpathentry kind="lib" path="/Users/apple/Documents/GitHub/csci310groupM/proj2/byte-buddy-1.6.5.jar"/>
+=======
+	<classpathentry kind="lib" path="junit-4.12.jar"/>
+>>>>>>> 3c0a004b89057710447d4cf3a09af28bf8dcfa1a
 	<classpathentry kind="lib" path="mockito-all-2.0.2-beta.jar"/>
 	<classpathentry kind="lib" path="mockito-core-2.15.6.jar"/>
 	<classpathentry kind="lib" path="spring-2.0.6.jar"/>
 	<classpathentry kind="lib" path="spring-mock-2.0.6.jar"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/junit-4.12.jar"/>
+=======
+>>>>>>> dd3d01b3bc6e10d5e74316d5c13025293c617aa9
+=======
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/mockito-all-2.0.2-beta.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/mockito-core-2.15.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/spring-2.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/spring-mock-2.0.6.jar"/>
+>>>>>>> parent of dd3d01b... Merge branch 'master' of github.com:AustinBahng/csci310groupM
+>>>>>>> 3c0a004b89057710447d4cf3a09af28bf8dcfa1a
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
