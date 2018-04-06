@@ -23,10 +23,10 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="junit-4.12.jar"/>
 	<classpathentry kind="lib" path="mockito-all-2.0.2-beta.jar"/>
 	<classpathentry kind="lib" path="mockito-core-2.15.6.jar"/>
 	<classpathentry kind="lib" path="spring-2.0.6.jar"/>
 	<classpathentry kind="lib" path="spring-mock-2.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Austin/Desktop/scollage/csci310groupM/proj2/junit-4.12.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

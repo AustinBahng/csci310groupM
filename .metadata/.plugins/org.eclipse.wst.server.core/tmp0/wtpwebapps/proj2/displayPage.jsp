@@ -16,18 +16,17 @@
 	<meta charset="UTF-8">
 	<title>Build Another Collage</title>
 	<link rel="stylesheet" type="text/css" href="displayPageStyle.css">
-	<script src="displayPageScripts.js"></script>
+	<script src="displayScripts.js"></script>
 	</head>
 	<body onload="loadFirstContent('<%= collageTitle%>','<%= collageImage%>','<%= isError%>')" >
 		<!-- header: contains the title and export button -->
 		<div id="header">
 			<h1 id="title">Collage for topic X</h1>
-			<div id="export">
-				<!-- <form name="export" id="export" method="POST" action="" enctype="multipart/form-data">
-					<input type="Submit" id="exportButton" name="export" value="Export" />
-				</form> -->
-				<a id="exportButton" onclick="prepareDownload()" download="test.jpeg" style="display:none">Export</a>
-			</div>
+			
+			<a id="saveButton">Save to History</a>
+			<a id="exportButtonTemp" download="test.jpeg" >Export</a>
+			<a id="exportButton" onclick="prepareDownload()" download="test.jpeg" style="display: none;">Export</a>
+			
 		</div>
 
 		<!-- mainSpace: contains either the main collage being displayed or the error msg -->
@@ -40,6 +39,18 @@
 		<div id="newInput">
 			<form name="enterTopic" id="inputForm" method="POST" action="" enctype="multipart/form-data" onsubmit="event.preventDefault()">
 				<input type="text" id="inputBox" name="topic" placeholder="Enter topic" onkeyup="editingStopped()"/>
+				<input type="text" id="inputBoxShape" name="shape" placeholder="Enter collage Shape"/>
+				<select name="filters">
+				    <option value="none">No Filter</option>
+				    <option value="B&W">B&W Filter</option>
+				    <option value="Greyscale">Greyscale Filter</option>
+				    <option value="Sepia">Sepia Filter</option>
+				</select>
+				<input type="checkbox" id="bordersCheckbox" name="borders" value="borders"/> Image borders
+				<input type="checkbox" id="rotationsCheckbox" name="rotation" value="rotation"/> Image rotations
+				<input type="text" id="inputBoxWidth" name="width" placeholder="Width (px)"/>
+				<input type="text" id="inputBoxHeight" name="height" placeholder="Height (px)"/>
+				<br>
 				<input type="Submit" id="submitButton" name="build" value="Build Another Collage" onclick= "return makeCollageRequest();" onsubmit="return makeCollageRequest();" disabled />
 			</form>
 		</div>
