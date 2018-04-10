@@ -1,3 +1,10 @@
 .metadata/
 .recommenders/
 proj2/.classpath
+proj2/.metadata/
+proj2/bin/
+proj2/build/
+proj2/.DS_Store
+*.class
+proj2/.project
+proj2/.settings/
