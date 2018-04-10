@@ -17,8 +17,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,51 +30,52 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class CollageBuilder {
-    private boolean validCollage;
-	
-	//returns true/false whether the collage list has 30 images or not
+	private boolean validCollage;
+
+	// returns true/false whether the collage list has 30 images or not
 	public boolean calculateSufficiecy() {
 		// TODO
 		return validCollage;
 	}
-	
-	//builds the collage
+
+	// builds the collage
 	public Collage buildCollage(String querry, String shape) {
-		//get json from google
+		// get json from google
 		List<BufferedImage> images = getImageResults(querry);
 		// set valid collage based on number of imgaes found
-		if(images.size() < 30) {
+		if (images.size() < 30) {
 			validCollage = false;
 		} else {
 			validCollage = true;
 		}
-		//populate the collages list with 30 collage objects
-		//apply rotations and sizing to all images in list
-        for (int i=0; i < images.size(); i++) {
-        	System.out.println(i);
-            images.set(i, resize(images.get(i), 85, 50));
-            images.set(i, addBorder(images.get(i), 3));
-            images.set(i, rotate(images.get(i), generateRandomAngle()));
-        }
-        System.out.println("SIZE OF IMAGE LIST: " + images.size());
-        // compile all images into 1 image
-        BufferedImage bufferedCollage = concatenation(images,shape.length());
-        
-        bufferedCollage = shapeCollage(bufferedCollage, shape);
-        // convert buffered image into byte array
-        ByteArrayOutputStream baos;
-        // construct collage to return
-        Collage collage = null;
-        try {
+		// populate the collages list with 30 collage objects
+		// apply rotations and sizing to all images in list
+		for (int i = 0; i < images.size(); i++) {
+			System.out.println(i);
+			images.set(i, toSepia(images.get(i), 20));
+			images.set(i, resize(images.get(i), 85, 50));
+			images.set(i, addBorder(images.get(i), 3));
+			images.set(i, rotate(images.get(i), generateRandomAngle()));
+		}
+		System.out.println("SIZE OF IMAGE LIST: " + images.size());
+		// compile all images into 1 image
+		BufferedImage bufferedCollage = concatenation(images, shape.length());
+
+		bufferedCollage = shapeCollage(bufferedCollage, shape);
+		// convert buffered image into byte array
+		ByteArrayOutputStream baos;
+		// construct collage to return
+		Collage collage = null;
+		try {
 			baos = convertToBytes(bufferedCollage);
-	        byte[] bytes = baos.toByteArray();
-	        collage = new Collage(querry,bytes,calculateSufficiecy());
+			byte[] bytes = baos.toByteArray();
+			collage = new Collage(querry, bytes, calculateSufficiecy());
 		} catch (IOException e) {
 			System.out.println("IOEXCEPTION WITH IMAGEIO.WRITE()");
 		}
-        return collage;
+		return collage;
 	}
-	
+
 	public BufferedImage shapeCollage(BufferedImage img, String shapeText) {
 		BufferedImage textCollage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = textCollage.createGraphics();
@@ -87,62 +86,63 @@ public class CollageBuilder {
 		GlyphVector gv = font.createGlyphVector(frc, shapeText);
 		Rectangle2D box = gv.getVisualBounds();
 		System.out.println("WIDTH OF TEXT: " + box.getWidth());
-        //int xOff = 300 - (int)box.getX();
+		// int xOff = 300 - (int)box.getX();
 		int xOff = (int) (img.getWidth() / 2 - box.getWidth() / 2);
-        int yOff = 70 - (int)box.getY();
-        Shape shape = gv.getOutline(xOff,yOff);
-        System.out.println("xOff: " + xOff);
-        g.setClip(shape);
-        g.drawImage(img,0,0,null);
-       
-        // can add border to letters
-        //g.setClip(null);
-        //g.setStroke(new BasicStroke(2f));
-        //g.setColor(Color.WHITE);
-        
-       // g.setRenderingHint(
-       //     RenderingHints.KEY_ANTIALIASING,
-       //     RenderingHints.VALUE_ANTIALIAS_ON);
-        g.draw(shape);
+		int yOff = 70 - (int) box.getY();
+		Shape shape = gv.getOutline(xOff, yOff);
+		System.out.println("xOff: " + xOff);
+		g.setClip(shape);
+		g.drawImage(img, 0, 0, null);
 
-        g.dispose();
-        return textCollage;
+		// can add border to letters
+		// g.setClip(null);
+		// g.setStroke(new BasicStroke(2f));
+		// g.setColor(Color.WHITE);
+
+		// g.setRenderingHint(
+		// RenderingHints.KEY_ANTIALIASING,
+		// RenderingHints.VALUE_ANTIALIAS_ON);
+		g.draw(shape);
+
+		g.dispose();
+		return textCollage;
 	}
-	
-	public ByteArrayOutputStream convertToBytes(BufferedImage img) throws IOException{
+
+	public ByteArrayOutputStream convertToBytes(BufferedImage img) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ImageIO.write(img, "jpg", baos);
 		return baos;
 	}
-    
-    public static BufferedImage concatenation(List<BufferedImage> images, int textSize) {
-    	// create collage image
-        BufferedImage resultCollage = new BufferedImage(700, 600, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = resultCollage.createGraphics();
-        // set starting indexes
-        int x = 50;
-        int y = 40;
-        if(textSize == 1) {
-        	x = 170;
-        	y = 50;
-        }
-        // loop through each image and add it to collage, updating x and y every iterations
-        for(int i = 0; i < images.size(); i++) {
-        	g2d.drawImage(images.get(i), null, x, y);
-        	x += 55;
-        	if(x > 600) {
-        		y += 38;
-        		x = 50;
-        		if(textSize == 1) {
-        			x = 170;
-        		}
-        	}
-        }
-        g2d.dispose();
-        return resultCollage;
-    }
-	
-	public List<BufferedImage> getImageResults(String querry){
+
+	public static BufferedImage concatenation(List<BufferedImage> images, int textSize) {
+		// create collage image
+		BufferedImage resultCollage = new BufferedImage(700, 600, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2d = resultCollage.createGraphics();
+		// set starting indexes
+		int x = 50;
+		int y = 40;
+		if (textSize == 1) {
+			x = 170;
+			y = 50;
+		}
+		// loop through each image and add it to collage, updating x and y every
+		// iterations
+		for (int i = 0; i < images.size(); i++) {
+			g2d.drawImage(images.get(i), null, x, y);
+			x += 55;
+			if (x > 600) {
+				y += 38;
+				x = 50;
+				if (textSize == 1) {
+					x = 170;
+				}
+			}
+		}
+		g2d.dispose();
+		return resultCollage;
+	}
+
+	public List<BufferedImage> getImageResults(String querry) {
 		// initial variables
 		String key = "AIzaSyBGtIg8lDEoz1y9stGxIBgBu37eEWgRt4s";
 		String id = "001699835611631837436:s1dpcehsldo";
@@ -154,23 +154,24 @@ public class CollageBuilder {
 		try {
 			// construct url for search api call
 			// each call gets 10 results
-			for(int i = 0; i < numCalls; i++) {
-				URL url = new URL("https://www.googleapis.com/customsearch/v1?key=" + key 
-				+ "&cx=" + id + "&q=" + searchTerms + "&searchType=image" + "&start=" + (i*10 + 1) + "&fields=items(link)");
+			for (int i = 0; i < numCalls; i++) {
+				URL url = new URL("https://www.googleapis.com/customsearch/v1?key=" + key + "&cx=" + id + "&q="
+						+ searchTerms + "&searchType=image" + "&start=" + (i * 10 + 1) + "&fields=items(link)");
 				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
 				conn.setRequestProperty("Accept", "application/json");
 				searchConnections.add(conn);
 			}
 			System.out.println("OPENED CONNECTIONS");
-			// setup input readers, have each connection open on a seperate thread
+			// setup input readers, have each connection open on a seperate
+			// thread
 			SearchThread[] searches = new SearchThread[numCalls];
-			for(int i = 0; i < numCalls; i++) {
+			for (int i = 0; i < numCalls; i++) {
 				searches[i] = new SearchThread(searchConnections.get(i));
 				searches[i].start();
 			}
 			// wait for each thread to finish before continueing
-			for(int i = 0; i < numCalls; i++) {
+			for (int i = 0; i < numCalls; i++) {
 				try {
 					searches[i].join();
 				} catch (InterruptedException e) {
@@ -179,46 +180,48 @@ public class CollageBuilder {
 				}
 			}
 			// add the image url results from each thread into 1 list
-			for(int i = 0; i < numCalls; i++) {
+			for (int i = 0; i < numCalls; i++) {
 				resultLinks.addAll(searches[i].getURLs());
 			}
-			
+
 			// setup up 10 threads to process 3 images each
 			int httpThreadCount = 10;
 			int subIndex = numCalls;
 			System.out.println(resultLinks.size());
 			// if not enough image urls, just return a blank list
-			if(resultLinks.size() < (numCalls * 10)) {
+			if (resultLinks.size() < (numCalls * 10)) {
 				return new ArrayList<BufferedImage>();
 			}
 			HttpConnectionThread[] connections = new HttpConnectionThread[httpThreadCount];
 			// start each thread
-			for(int i = 0; i < httpThreadCount; i++) {
+			for (int i = 0; i < httpThreadCount; i++) {
 				connections[i] = new HttpConnectionThread(resultLinks.subList(i * subIndex, i * subIndex + subIndex));
 				connections[i].start();
 			}
 			// wait for each thread to finish
-			for(int i = 0; i < httpThreadCount; i++) {
+			for (int i = 0; i < httpThreadCount; i++) {
 				try {
 					connections[i].join();
 				} catch (InterruptedException ex) {
 					ex.printStackTrace();
 				}
 			}
-			// combine the reultings buffered images from each thread into 1 list
-			for(int i = 0; i < httpThreadCount; i++) {
+			// combine the reultings buffered images from each thread into 1
+			// list
+			for (int i = 0; i < httpThreadCount; i++) {
 				imageResults.addAll(connections[i].getImages());
 			}
-			// if not enough valid images due to 403 errors, do another iteration of the process
-			URL fillUrl = new URL("https://www.googleapis.com/customsearch/v1?key=" + key 
-					+ "&cx=" + id + "&q=" + searchTerms + "&searchType=image" + "&start=31&fields=items(link)");
+			// if not enough valid images due to 403 errors, do another
+			// iteration of the process
+			URL fillUrl = new URL("https://www.googleapis.com/customsearch/v1?key=" + key + "&cx=" + id + "&q="
+					+ searchTerms + "&searchType=image" + "&start=31&fields=items(link)");
 			HttpURLConnection conn = (HttpURLConnection) fillUrl.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String output = "";
 			String json = "";
-			while((output = br.readLine()) != null) {
+			while ((output = br.readLine()) != null) {
 				json += output;
 			}
 			JsonElement jelement = new JsonParser().parse(json);
@@ -226,80 +229,82 @@ public class CollageBuilder {
 			JsonArray jarray = jobject.getAsJsonArray("items");
 			// get the link strings and add them to the list of images
 			String link = "";
-			for(int j = 0; j < jarray.size(); j++) {
+			for (int j = 0; j < jarray.size(); j++) {
 				jobject = jarray.get(j).getAsJsonObject();
 				link = jobject.get("link").getAsString();
 				System.out.println(link);
 				URL temp = new URL(link);
 				HttpURLConnection httpcon = (HttpURLConnection) temp.openConnection();
-				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0 AppleWebKit/537.36 Chrome/64.0.3282 Safari/537.36");
+				httpcon.addRequestProperty("User-Agent",
+						"Mozilla/5.0 AppleWebKit/537.36 Chrome/64.0.3282 Safari/537.36");
 				httpcon.setConnectTimeout(500);
 				try {
 					BufferedImage img = ImageIO.read(httpcon.getInputStream());
-					if(imageResults.size() == numCalls * 10) {
+					if (imageResults.size() == numCalls * 10) {
 						break;
 					}
 					imageResults.add(img);
-				} catch(FileNotFoundException fnfe) {
-					
+				} catch (FileNotFoundException fnfe) {
+
 				}
 			}
-		}catch(IOException ioe) {
+		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 		return imageResults;
 	}
-	
-	//rotates a given image with an angle
-	public static BufferedImage rotate(BufferedImage img, int angle) { 
+
+	// rotates a given image with an angle
+	public static BufferedImage rotate(BufferedImage img, int angle) {
 		// initialize variables
 		double rads = Math.toRadians(angle);
 		double sin = Math.abs(Math.sin(rads));
 		double cos = Math.abs(Math.cos(rads));
-        int w = img.getWidth();  
-        int h = img.getHeight();
-        int newW = (int) Math.floor(w * cos + h * sin);
-        int newH = (int) Math.floor(h * cos + w * sin);
-        
-        // create new image
-		BufferedImage rotatedImage = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);  
-        Graphics2D g = rotatedImage.createGraphics(); 
-        // rotate image
-        AffineTransform transform = new AffineTransform();
-        transform.translate((newW - w) / 2, (newH - h) / 2);
-        int x = w / 2;
-        int y = h / 2;        
-        transform.rotate(rads,x,y);
-        g.setTransform(transform);
-        g.drawImage(img, 0, 0, null);
-       // g.setColor(Color.WHITE);
-        //g.drawRect(0, 0, newW - 1, newH - 1);
-        g.dispose();
-        return rotatedImage; 
-    }
-	
-	//generates a random angle
+		int w = img.getWidth();
+		int h = img.getHeight();
+		int newW = (int) Math.floor(w * cos + h * sin);
+		int newH = (int) Math.floor(h * cos + w * sin);
+
+		// create new image
+		BufferedImage rotatedImage = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = rotatedImage.createGraphics();
+		// rotate image
+		AffineTransform transform = new AffineTransform();
+		transform.translate((newW - w) / 2, (newH - h) / 2);
+		int x = w / 2;
+		int y = h / 2;
+		transform.rotate(rads, x, y);
+		g.setTransform(transform);
+		g.drawImage(img, 0, 0, null);
+		// g.setColor(Color.WHITE);
+		// g.drawRect(0, 0, newW - 1, newH - 1);
+		g.dispose();
+		return rotatedImage;
+	}
+
+	// generates a random angle
 	public int generateRandomAngle() {
 		Random rand = new Random();
-		int  n = rand.nextInt(91) - 45; //generates a random number 0-90, and scales it to be from -45 to 45
+		int n = rand.nextInt(91) - 45; // generates a random number 0-90, and
+										// scales it to be from -45 to 45
 		return n;
 	}
-	
-	//takes in an image, and the new sizing requirements
-	public static BufferedImage resize(BufferedImage img, int newW, int newH) {  
-        int w = img.getWidth();  
-        int h = img.getHeight();  
-        // create target image
-        BufferedImage dimg = new BufferedImage(newW, newH, img.getType());  
-        Graphics2D g = dimg.createGraphics(); 
-        // redraw the image to the desired size
-        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);  
-        g.drawImage(img, 0, 0, newW, newH, 0, 0, w, h, null);  
-        g.dispose();  
-        return dimg;  
-    }  
-	
-    //add border
+
+	// takes in an image, and the new sizing requirements
+	public static BufferedImage resize(BufferedImage img, int newW, int newH) {
+		int w = img.getWidth();
+		int h = img.getHeight();
+		// create target image
+		BufferedImage dimg = new BufferedImage(newW, newH, img.getType());
+		Graphics2D g = dimg.createGraphics();
+		// redraw the image to the desired size
+		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g.drawImage(img, 0, 0, newW, newH, 0, 0, w, h, null);
+		g.dispose();
+		return dimg;
+	}
+
+	// add border
 	public static BufferedImage addBorder(BufferedImage img, int padding) {
 		// initialize variables
 		int w = img.getWidth();
@@ -314,6 +319,54 @@ public class CollageBuilder {
 		graph.drawImage(img, padding, padding, null);
 		graph.dispose();
 		return frame;
-    }
+	}
 
+	public static BufferedImage toSepia(BufferedImage image, int sepiaIntensity) {
+
+		int width = image.getWidth();
+		int height = image.getHeight();
+		int sepiaDepth = 20;
+
+		int[] imagePixels = image.getRGB(0, 0, width, height, null, 0, width);
+
+		for (int i = 0; i < imagePixels.length; i++) {
+			int color = imagePixels[i];
+
+			int r = (color >> 16) & 0xff;
+			int g = (color >> 8) & 0xff;
+			int b = (color) & 0xff;
+			int gry = (r + g + b) / 3;
+
+			r = g = b = gry;
+			r = r + (sepiaDepth * 2);
+			g = g + sepiaDepth;
+
+			if (r > 255) {
+				r = 255;
+			}
+			if (g > 255) {
+				g = 255;
+			}
+			if (b > 255) {
+				b = 255;
+			}
+
+			// Darken blue color to increase sepia effect
+			b -= sepiaIntensity;
+
+			// normalize if out of bounds
+			if (b < 0) {
+				b = 0;
+			}
+			if (b > 255) {
+				b = 255;
+			}
+
+			imagePixels[i] = (color & 0xff000000) + (r << 16) + (g << 8) + b;
+		}
+
+		BufferedImage res = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		res.setRGB(0, 0, width, height, imagePixels, 0, width);
+		return res;
+	}
 }
