@@ -9,20 +9,74 @@ function editingStopped(){
 
 //Links the image being displayed to the download button
 function prepareDownload(){
-	var img = document.getElementById('mainCollage');
+	//Check radio button to see if we should export the image to PDF or PNG
+	//var exportAs = document.getElementById('exportAsOptions').value;
+	if (document.getElementById('pdf').checked) {
+		console.log("Exporting image as PDF");
+		var img = document.getElementById('mainCollage');
 
-	var canvas = document.createElement('canvas');
-	canvas.id = "myCanvas";
-	canvas.height = img.height;
-	canvas.width = img.width;
-	console.log(canvas.width);
-	console.log(canvas.height);
-	context = canvas.getContext('2d');
-	context.drawImage(img,0,0,canvas.width,canvas.height);
-	var newImg = canvas.toDataURL('image.png');
-	var exportDiv = document.getElementById('exportButton');
-	exportDiv.href = newImg;
-	exportDiv.download = img.alt + ".png";
+		var canvas = document.createElement('canvas');
+		canvas.id = "myCanvas";
+		canvas.height = img.height;
+		canvas.width = img.width;
+		console.log(canvas.width);
+		console.log(canvas.height);
+		context = canvas.getContext('2d');
+		context.drawImage(img,0,0,300,300);
+		var newImg = canvas.toDataURL('image.png');
+//		var exportDiv = document.getElementById('exportButton');
+//		exportDiv.href = newImg;
+//		exportDiv.download = img.alt + ".png";
+		var pdf = new jsPDF();
+		pdf.addImage(newImg, 'PNG', 0, 0, canvas.width, canvas.height);
+		var exportDiv = document.getElementById('exportButton');
+		//exportDiv.href = pdf;
+		//exportDiv.href = pdf;
+		//exportDiv.href = pdf.save(img.alt + ".pdf");
+		exportDiv.download = img.alt + ".pdf";
+		pdf.save(img.alt + ".pdf");
+		
+	} else {
+		console.log("Exporting image as PNG");
+		var img = document.getElementById('mainCollage');
+
+		var canvas = document.createElement('canvas');
+		canvas.id = "myCanvas";
+		canvas.height = img.height;
+		canvas.width = img.width;
+		console.log(canvas.width);
+		console.log(canvas.height);
+		context = canvas.getContext('2d');
+		context.drawImage(img,0,0,canvas.width,canvas.height);
+		var newImg = canvas.toDataURL('image.png');
+		var exportDiv = document.getElementById('exportButton');
+		exportDiv.href = newImg;
+		exportDiv.download = img.alt + ".png";
+	}
+	
+//	console.log("Exporting image as PNG");
+//	var img = document.getElementById('mainCollage');
+//
+//	var canvas = document.createElement('canvas');
+//	canvas.id = "myCanvas";
+//	canvas.height = img.height;
+//	canvas.width = img.width;
+//	console.log(canvas.width);
+//	console.log(canvas.height);
+//	context = canvas.getContext('2d');
+//	context.drawImage(img,0,0,canvas.width,canvas.height);
+//	var newImg = canvas.toDataURL("image/png");
+////	var exportDiv = document.getElementById('exportButton');
+////	exportDiv.href = newImg;
+////	exportDiv.download = img.alt + ".pdf";
+//	var pdf = new jsPDF();
+//	pdf.addImage(newImg, 'PNG', 10, 10, 100, 100);
+//	var exportDiv = document.getElementById('exportButton');
+//	exportDiv.href = pdf;
+//	exportDiv.download = img.alt + ".pdf";
+//	pdf.save("download.pdf");
+	
+	
 
 	// var exportDiv = document.getElementById('exportButton');
 	// exportDiv.href = img.src;

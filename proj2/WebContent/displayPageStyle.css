@@ -54,6 +54,13 @@ input[type=text]{
 	font-family: system-ui;
 }
 
+#exportAsOptions{
+	/*CSS for export options radio buttons*/
+	/*float: right;*/
+	padding-right: 180px;
+	padding-left: 925px;
+}
+
 #exportButtonTemp{
 	padding-right: 30px;
 	padding-left: 30px;

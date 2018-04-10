@@ -17,8 +17,10 @@
 	<title>Build Another Collage</title>
 	<link rel="stylesheet" type="text/css" href="displayPageStyle.css">
 	<script src="displayScripts.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
 	</head>
 	<body onload="loadFirstContent('<%= collageTitle%>','<%= collageImage%>','<%= isError%>')" >
+		
 		<!-- header: contains the title and export button -->
 		<div id="header">
 			<h1 id="title">Collage for topic X</h1>
@@ -26,8 +28,12 @@
 			<a id="saveButton">Save to History</a>
 			<a id="exportButtonTemp" download="test.jpeg" >Export</a>
 			<a id="exportButton" onclick="prepareDownload()" download="test.jpeg" style="display: none;">Export</a>
-			
+			<form id="exportAsOptions">
+				<input type="radio" name="exportAs" value="png" id="png" checked>PNG
+				<input type="radio" name="exportAs" value="pdf" id="pdf">PDF<br />
+			</form>
 		</div>
+		
 
 		<!-- mainSpace: contains either the main collage being displayed or the error msg -->
 		<div id="mainSpace">
