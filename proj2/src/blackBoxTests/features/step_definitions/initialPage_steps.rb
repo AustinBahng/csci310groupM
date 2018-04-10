@@ -1,5 +1,5 @@
 Given(/^that I am on the Initial Page$/) do
-  visit "http://localhost:8080/scollage/homepage.jsp"
+  visit "http://localhost:8080/proj2/homepage.jsp"
 end
 
 Then(/^the background of the initial page is solid light gray$/) do

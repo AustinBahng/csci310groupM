@@ -1,7 +1,7 @@
 numSecondsWait = 30
 
 Given(/^that I am in localhost$/) do
-  visit "http://localhost:8080/scollage/homepage.jsp"
+  visit "http://localhost:8080/proj2/homepage.jsp"
 end
 
 Given(/^I have typed "([^"]*)" into the search bar$/) do |arg1|
@@ -27,7 +27,7 @@ Then(/^I should see "([^"]*)" displayed in black font$/) do |arg1|
 end
 
 Given(/^that I am on the Collage Display Page$/) do
-  visit "http://localhost:8080/scollage/displayPage.jsp"
+  visit "http://localhost:8080/proj2/displayPage.jsp"
 end
 
 Then(/^the color of the build another collage button is grey$/) do

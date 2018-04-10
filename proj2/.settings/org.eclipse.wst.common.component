@@ -2,6 +2,9 @@
     <wb-module deploy-name="proj2">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="gson-2.6.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/rblay/Desktop/USC/201801 - Spring/CSCI-310/project2/csci310groupM/proj2/gson-2.6.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="proj2"/>
         <property name="java-output-path" value="/proj2/build/classes"/>
     </wb-module>
