@@ -135,4 +135,25 @@ public class CollageBuilderTest {
 		BufferedImage testImg2 = CollageBuilder.addBorder(testImg, 5);
 		assertNotSame(testImg, testImg2);
 	}
+
+	@Test
+	public void testSepiaFilter() {
+		BufferedImage testImg = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage testImg2 = CollageBuilder.toSepia(testImg);
+		assertNotSame(testImg, testImg2);
+	}
+
+	@Test
+	public void testBlackAndWhiteFilter() {
+		BufferedImage testImg = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage testImg2 = CollageBuilder.toBlackAndWhite(testImg);
+		assertNotSame(testImg, testImg2);
+	}
+
+	@Test
+	public void testGreyscaleFilter() {
+		BufferedImage testImg = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage testImg2 = CollageBuilder.toGreyscale(testImg);
+		assertNotSame(testImg, testImg2);
+	}
 }

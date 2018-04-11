@@ -52,7 +52,7 @@ public class CollageBuilder {
 		// apply rotations and sizing to all images in list
 		for (int i = 0; i < images.size(); i++) {
 			System.out.println(i);
-			images.set(i, toSepia(images.get(i), 20));
+			images.set(i, makeGray(images.get(i)));
 			images.set(i, resize(images.get(i), 85, 50));
 			images.set(i, addBorder(images.get(i), 3));
 			images.set(i, rotate(images.get(i), generateRandomAngle()));
@@ -321,11 +321,11 @@ public class CollageBuilder {
 		return frame;
 	}
 
-	public static BufferedImage toSepia(BufferedImage image, int sepiaIntensity) {
+	public static BufferedImage toSepia(BufferedImage image) {
 
 		int width = image.getWidth();
 		int height = image.getHeight();
-		int sepiaDepth = 20;
+		int filterDepth = 0;
 
 		int[] imagePixels = image.getRGB(0, 0, width, height, null, 0, width);
 
@@ -338,8 +338,8 @@ public class CollageBuilder {
 			int gry = (r + g + b) / 3;
 
 			r = g = b = gry;
-			r = r + (sepiaDepth * 2);
-			g = g + sepiaDepth;
+			r = r + (filterDepth * 2);
+			g = g + filterDepth;
 
 			if (r > 255) {
 				r = 255;
@@ -352,7 +352,7 @@ public class CollageBuilder {
 			}
 
 			// Darken blue color to increase sepia effect
-			b -= sepiaIntensity;
+			b -= 0;
 
 			// normalize if out of bounds
 			if (b < 0) {
@@ -368,5 +368,70 @@ public class CollageBuilder {
 		BufferedImage res = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		res.setRGB(0, 0, width, height, imagePixels, 0, width);
 		return res;
+	}
+
+	public static BufferedImage toBlackAndWhite(BufferedImage image) {
+
+		int width = image.getWidth();
+		int height = image.getHeight();
+		int filterDepth = 0;
+
+		int[] imagePixels = image.getRGB(0, 0, width, height, null, 0, width);
+
+		for (int i = 0; i < imagePixels.length; i++) {
+			int color = imagePixels[i];
+
+			int r = (color >> 16) & 0xff;
+			int g = (color >> 8) & 0xff;
+			int b = (color) & 0xff;
+			int gry = (r + g + b) / 3;
+
+			r = g = b = gry;
+			r = r + (filterDepth * 2);
+			g = g + filterDepth;
+
+			if (r > 255) {
+				r = 255;
+			}
+			if (g > 255) {
+				g = 255;
+			}
+			if (b > 255) {
+				b = 255;
+			}
+
+			// Darken blue color to increase sepia effect
+			b -= 0;
+
+			// normalize if out of bounds
+			if (b < 0) {
+				b = 0;
+			}
+			if (b > 255) {
+				b = 255;
+			}
+
+			imagePixels[i] = (color & 0xff000000) + (r << 16) + (g << 8) + b;
+		}
+
+		BufferedImage res = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		res.setRGB(0, 0, width, height, imagePixels, 0, width);
+		return res;
+	}
+
+	public static BufferedImage makeGray(BufferedImage img) {
+		for (int x = 0; x < img.getWidth(); ++x) {
+			for (int y = 0; y < img.getHeight(); ++y) {
+				int rgb = img.getRGB(x, y);
+				int r = (rgb >> 16) & 0xFF;
+				int g = (rgb >> 8) & 0xFF;
+				int b = (rgb & 0xFF);
+
+				int grayLevel = (r + g + b) / 3;
+				int gray = (grayLevel << 16) + (grayLevel << 8) + grayLevel;
+				img.setRGB(x, y, gray);
+			}
+		}
+		return (img);
 	}
 }
