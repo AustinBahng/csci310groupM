@@ -15,13 +15,12 @@ import javax.servlet.http.HttpSession;
 public class ImageServer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// get user input from page
 		String querry = (String) request.getParameter("topic");
 		// construct collage based on querry
 		CollageBuilder cb = new CollageBuilder();
-		Collage collage = cb.buildCollage(querry, "fight on");
+		Collage collage = cb.buildCollage(querry, "fight on", 0);
 		// create session
 		HttpSession session = request.getSession(true);
 		// convert byte array into base 64 string

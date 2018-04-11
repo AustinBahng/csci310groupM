@@ -195,8 +195,11 @@ function makeCollageRequest(){
 	event.preventDefault();
 	var querry = document.getElementById("inputBox").value;
 	var shape = document.getElementById("inputBoxShape").value;
-	var url = "BuildAnotherImageServer?topic=" + querry + "&shape=" + shape;
+	var filterDropDown = document.getElementById("filterSelector");
+	var filterNum = filterDropDown.options[filterDropDown.selectedIndex].value;
 	
+	var url = "BuildAnotherImageServer?topic=" + querry + "&shape=" + shape + "&filterNum="+filterNum;
+	console.log(url);
 	var req = new XMLHttpRequest();
 	req.open("GET", url, true);
 	req.send();

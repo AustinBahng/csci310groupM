@@ -46,11 +46,11 @@
 			<form name="enterTopic" id="inputForm" method="POST" action="" enctype="multipart/form-data" onsubmit="event.preventDefault()">
 				<input type="text" id="inputBox" name="topic" placeholder="Enter topic" onkeyup="editingStopped()"/>
 				<input type="text" id="inputBoxShape" name="shape" placeholder="Enter collage Shape"/>
-				<select name="filters">
-				    <option value="none">No Filter</option>
-				    <option value="B&W">B&W Filter</option>
-				    <option value="Greyscale">Greyscale Filter</option>
-				    <option value="Sepia">Sepia Filter</option>
+				<select name="filters" id = "filterSelector">
+				    <option value="0">No Filter</option>
+				    <option value="1">B&W Filter</option>
+				    <option value="2">Greyscale Filter</option>
+				    <option value="3">Sepia Filter</option>
 				</select>
 				<input type="checkbox" id="bordersCheckbox" name="borders" value="borders"/> Image borders
 				<input type="checkbox" id="rotationsCheckbox" name="rotation" value="rotation"/> Image rotations

@@ -24,8 +24,13 @@ public class BuildAnotherImageServer extends HttpServlet {
 			throws ServletException, IOException {
 		String querry = (String) request.getParameter("topic");
 		String shape = (String) request.getParameter("shape");
+		String tempFilterNum = (String) request.getParameter("filterNum");
+		System.out.println("FILTER NUMBER:");
+		System.out.println(tempFilterNum);
+		int filterNum = Integer.parseInt(tempFilterNum);
+
 		CollageBuilder cb = new CollageBuilder();
-		Collage collage = cb.buildCollage(querry, shape);
+		Collage collage = cb.buildCollage(querry, shape, filterNum);
 
 		byte[] encoded = Base64.getEncoder().encode(collage.getImage());
 		String collageImageStr = new String(encoded);
