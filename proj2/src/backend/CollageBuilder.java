@@ -52,7 +52,7 @@ public class CollageBuilder {
 		// apply rotations and sizing to all images in list
 		for (int i = 0; i < images.size(); i++) {
 			System.out.println(i);
-			images.set(i, makeGray(images.get(i)));
+			images.set(i, toGreyscale(images.get(i)));
 			images.set(i, resize(images.get(i), 85, 50));
 			images.set(i, addBorder(images.get(i), 3));
 			images.set(i, rotate(images.get(i), generateRandomAngle()));
@@ -419,7 +419,7 @@ public class CollageBuilder {
 		return res;
 	}
 
-	public static BufferedImage makeGray(BufferedImage img) {
+	public static BufferedImage toGreyscale(BufferedImage img) {
 		for (int x = 0; x < img.getWidth(); ++x) {
 			for (int y = 0; y < img.getHeight(); ++y) {
 				int rgb = img.getRGB(x, y);
