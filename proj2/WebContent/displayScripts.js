@@ -210,9 +210,13 @@ function makeCollageRequest(){
 		bordersValue = 1;
 	}
 	
+	var collageWidth = document.getElementById("inputBoxWidth").value;
+	var collageHeight = document.getElementById("inputBoxHeight").value;
+	
 	var url = "BuildAnotherImageServer?topic=" + querry + "&shape=" + 
 	shape + "&filterNum="+filterNum + "&rotationsValue=" + rotationsValue + 
-	"&bordersValue=" + bordersValue;
+	"&bordersValue=" + bordersValue + "&collageWidth=" + collageWidth + "&collageHeight=" + collageHeight;
+	
 	console.log(url);
 	var req = new XMLHttpRequest();
 	req.open("GET", url, true);
