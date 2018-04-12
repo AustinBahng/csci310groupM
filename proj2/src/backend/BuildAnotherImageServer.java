@@ -39,7 +39,7 @@ public class BuildAnotherImageServer extends HttpServlet {
 		int rotationsValue = Integer.parseInt(tempRotationsValue);
 
 		CollageBuilder cb = new CollageBuilder();
-		Collage collage = cb.buildCollage(querry, shape, filterNum);
+		Collage collage = cb.buildCollage(querry, shape, filterNum, rotationsValue, bordersValue);
 
 		byte[] encoded = Base64.getEncoder().encode(collage.getImage());
 		String collageImageStr = new String(encoded);
