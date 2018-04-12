@@ -28,6 +28,15 @@ public class BuildAnotherImageServer extends HttpServlet {
 		System.out.println("FILTER NUMBER:");
 		System.out.println(tempFilterNum);
 		int filterNum = Integer.parseInt(tempFilterNum);
+		String tempBordersValue = (String) request.getParameter("bordersValue");
+		System.out.println("BORDERS VALUE:");
+		System.out.println(tempBordersValue);
+		int bordersValue = Integer.parseInt(tempBordersValue);
+
+		String tempRotationsValue = (String) request.getParameter("rotationsValue");
+		System.out.println("BORDERS VALUE:");
+		System.out.println(tempRotationsValue);
+		int rotationsValue = Integer.parseInt(tempRotationsValue);
 
 		CollageBuilder cb = new CollageBuilder();
 		Collage collage = cb.buildCollage(querry, shape, filterNum);

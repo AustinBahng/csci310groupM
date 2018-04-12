@@ -198,7 +198,21 @@ function makeCollageRequest(){
 	var filterDropDown = document.getElementById("filterSelector");
 	var filterNum = filterDropDown.options[filterDropDown.selectedIndex].value;
 	
-	var url = "BuildAnotherImageServer?topic=" + querry + "&shape=" + shape + "&filterNum="+filterNum;
+	var rotationsCheckbox = document.getElementById("rotationsCheckbox");
+	var rotationsValue = 0;
+	if(rotationsCheckbox.checked){
+		rotationsValue = 1;
+	}
+	
+	var bordersCheckbox = document.getElementById("bordersCheckbox");
+	var bordersValue = 0;
+	if(bordersCheckbox.checked){
+		bordersValue = 1;
+	}
+	
+	var url = "BuildAnotherImageServer?topic=" + querry + "&shape=" + 
+	shape + "&filterNum="+filterNum + "&rotationsValue=" + rotationsValue + 
+	"&bordersValue=" + bordersValue;
 	console.log(url);
 	var req = new XMLHttpRequest();
 	req.open("GET", url, true);
