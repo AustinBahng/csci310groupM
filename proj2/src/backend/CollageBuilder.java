@@ -65,16 +65,15 @@ public class CollageBuilder {
 				images.set(i, toSepia(images.get(i)));
 			}
 
-			if (rotationsValue == 1) {
-				images.set(i, rotate(images.get(i), generateRandomAngle()));
-			}
-
+			images.set(i, resize(images.get(i), 85, 50));
+			
 			if (bordersValue == 1) {
 				images.set(i, addBorder(images.get(i), 3));
 			}
-
-			images.set(i, resize(images.get(i), 85, 50));
-
+			
+			if (rotationsValue == 1) {
+				images.set(i, rotate(images.get(i), generateRandomAngle()));
+			}
 		}
 		System.out.println("SIZE OF IMAGE LIST: " + images.size());
 		// compile all images into 1 image

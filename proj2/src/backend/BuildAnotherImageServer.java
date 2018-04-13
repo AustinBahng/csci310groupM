@@ -46,7 +46,7 @@ public class BuildAnotherImageServer extends HttpServlet {
 		String tempHeightValue = (String) request.getParameter("collageHeight");
 		System.out.println("Height VALUE:");
 		System.out.println(tempHeightValue);
-		int collageHeight = Integer.parseInt(tempWidthValue);
+		int collageHeight = Integer.parseInt(tempHeightValue);
 
 		CollageBuilder cb = new CollageBuilder();
 		Collage collage = cb.buildCollage(querry, shape, filterNum, rotationsValue, bordersValue, collageWidth,
