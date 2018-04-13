@@ -33,7 +33,8 @@ function prepareDownload(){
 		//exportDiv.href = pdf;
 		//exportDiv.href = pdf;
 		//exportDiv.href = pdf.save(img.alt + ".pdf");
-		exportDiv.download = img.alt + ".pdf";
+		//exportDiv.href = pdf;
+		//exportDiv.download = img.alt + ".pdf";
 		pdf.save(img.alt + ".pdf");
 		
 	} else {
