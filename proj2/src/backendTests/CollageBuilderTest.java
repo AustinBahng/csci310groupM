@@ -28,7 +28,7 @@ public class CollageBuilderTest {
 	@Test
 	public void testValidCalculateSufficiecy() {
 		CollageBuilder cb = new CollageBuilder();
-		cb.buildCollage("dog", "dog", 0, 1, 1, 800, 600);
+		cb.buildCollage("dog", "dog", 0);
 		boolean valid = cb.calculateSufficiecy();
 		assertTrue(valid);
 	}
@@ -36,7 +36,7 @@ public class CollageBuilderTest {
 	@Test
 	public void testInvalidCalculateSufficiecy() {
 		CollageBuilder cb = new CollageBuilder();
-		cb.buildCollage("asdfug3i17ga9we7fg3or899asdvuga7w3o8r7giuasef", "dog", 0, 1, 1, 800, 600);
+		cb.buildCollage("asdfug3i17ga9we7fg3or899asdvuga7w3o8r7giuasef", "dog", 0);
 		boolean valid = cb.calculateSufficiecy();
 		assertFalse(valid);
 	}
@@ -44,15 +44,14 @@ public class CollageBuilderTest {
 	@Test
 	public void testValidBuildCollage() {
 		CollageBuilder cb = new CollageBuilder();
-		Collage test = cb.buildCollage("dog", "dog", 0, 1, 1, 800, 600);
+		Collage test = cb.buildCollage("dog", "dog", 0);
 		assertTrue(test.getDisplay());
 	}
 
 	@Test
 	public void testInvalidBuildCollage() {
 		CollageBuilder cb = new CollageBuilder();
-		Collage test = cb.buildCollage("asdfuig2ior79iu73t9aosdufoogaowiurg23f3ougaef2jkasdhfiu", "dog", 0, 1, 1, 800,
-				600);
+		Collage test = cb.buildCollage("asdfuig2ior79iu73t9aosdufoogaowiurg23f3ougaef2jkasdhfiu", "dog", 0);
 		assertFalse(test.getDisplay());
 	}
 

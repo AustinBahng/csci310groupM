@@ -114,10 +114,10 @@ div#mainSpace{
 	display: block;
 }
 img#mainCollage{
-	/* min-width: 800px ;
+	min-width: 800px ;
 	min-height: 600px;
 	max-width: 70vw;
-	max-height: 50vh; */
+	max-height: 50vh;
 	margin: 0 auto;
 	display: block;
 }

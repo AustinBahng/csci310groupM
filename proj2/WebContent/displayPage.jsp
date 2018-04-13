@@ -52,10 +52,10 @@
 				    <option value="2">Greyscale Filter</option>
 				    <option value="3">Sepia Filter</option>
 				</select>
-				<input type="checkbox" id="bordersCheckbox" name="borders" value="bordersOn"/> Image borders
-				<input type="checkbox" id="rotationsCheckbox" name="rotation" value="rotationOn"/> Image rotations
-				<input type="text" id="inputBoxWidth" name="width" placeholder="Width (px)" value = "800"/>
-				<input type="text" id="inputBoxHeight" name="height" placeholder="Height (px)" value = "600"/>
+				<input type="checkbox" id="bordersCheckbox" name="borders" value="borders"/> Image borders
+				<input type="checkbox" id="rotationsCheckbox" name="rotation" value="rotation"/> Image rotations
+				<input type="text" id="inputBoxWidth" name="width" placeholder="Width (px)"/>
+				<input type="text" id="inputBoxHeight" name="height" placeholder="Height (px)"/>
 				<br>
 				<input type="Submit" id="submitButton" name="build" value="Build Another Collage" onclick= "return makeCollageRequest();" onsubmit="return makeCollageRequest();" disabled />
 			</form>

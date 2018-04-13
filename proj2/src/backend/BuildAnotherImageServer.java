@@ -28,29 +28,9 @@ public class BuildAnotherImageServer extends HttpServlet {
 		System.out.println("FILTER NUMBER:");
 		System.out.println(tempFilterNum);
 		int filterNum = Integer.parseInt(tempFilterNum);
-		String tempBordersValue = (String) request.getParameter("bordersValue");
-		System.out.println("BORDERS VALUE:");
-		System.out.println(tempBordersValue);
-		int bordersValue = Integer.parseInt(tempBordersValue);
-
-		String tempRotationsValue = (String) request.getParameter("rotationsValue");
-		System.out.println("ROTATIONS VALUE:");
-		System.out.println(tempRotationsValue);
-		int rotationsValue = Integer.parseInt(tempRotationsValue);
-
-		String tempWidthValue = (String) request.getParameter("collageWidth");
-		System.out.println("WIDTH VALUE:");
-		System.out.println(tempWidthValue);
-		int collageWidth = Integer.parseInt(tempWidthValue);
-
-		String tempHeightValue = (String) request.getParameter("collageHeight");
-		System.out.println("Height VALUE:");
-		System.out.println(tempHeightValue);
-		int collageHeight = Integer.parseInt(tempHeightValue);
 
 		CollageBuilder cb = new CollageBuilder();
-		Collage collage = cb.buildCollage(querry, shape, filterNum, rotationsValue, bordersValue, collageWidth,
-				collageHeight);
+		Collage collage = cb.buildCollage(querry, shape, filterNum);
 
 		byte[] encoded = Base64.getEncoder().encode(collage.getImage());
 		String collageImageStr = new String(encoded);

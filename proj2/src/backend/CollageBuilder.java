@@ -39,8 +39,7 @@ public class CollageBuilder {
 	}
 
 	// builds the collage
-	public Collage buildCollage(String querry, String shape, int filterNum, int rotationsValue, int bordersValue,
-			int collageWidth, int collageHeight) {
+	public Collage buildCollage(String querry, String shape, int filterNum) {
 		// get json from google
 		List<BufferedImage> images = getImageResults(querry);
 		// set valid collage based on number of imgaes found
@@ -66,24 +65,14 @@ public class CollageBuilder {
 			}
 
 			images.set(i, resize(images.get(i), 85, 50));
-			
-			if (bordersValue == 1) {
-				images.set(i, addBorder(images.get(i), 3));
-			}
-			
-			if (rotationsValue == 1) {
-				images.set(i, rotate(images.get(i), generateRandomAngle()));
-			}
+			images.set(i, addBorder(images.get(i), 3));
+			images.set(i, rotate(images.get(i), generateRandomAngle()));
 		}
 		System.out.println("SIZE OF IMAGE LIST: " + images.size());
 		// compile all images into 1 image
 		BufferedImage bufferedCollage = concatenation(images, shape.length());
 
 		bufferedCollage = shapeCollage(bufferedCollage, shape);
-
-		// resizing collage
-		bufferedCollage = resize(bufferedCollage, collageWidth, collageHeight);
-
 		// convert buffered image into byte array
 		ByteArrayOutputStream baos;
 		// construct collage to return
