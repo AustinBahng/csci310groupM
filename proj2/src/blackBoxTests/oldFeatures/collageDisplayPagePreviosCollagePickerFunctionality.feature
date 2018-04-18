@@ -20,11 +20,11 @@ Scenario: (15.2) If there is not enough space for all of the collages, user is a
 	And a collage for topic "giraffes" is generated
 	And a collage for topic "lizards" is generated
 	And a collage for topic "elephants" is generated
-        And a collage for topic "pigs" is generated
-        And a collage for topic "snakes" is generated
+    And a collage for topic "pigs" is generated
+    And a collage for topic "snakes" is generated
 	And a collage for topic "cows" is generated
 	And a collage for topic "chicken" is generated
-        And a collage for topic "hamsters" is generated
-        And a collage for topic "fish" is generated
+    And a collage for topic "hamsters" is generated
+    And a collage for topic "fish" is generated
 	And a collage for topic "dolphins" is generated
 	Then a scroll bar appears to see the entire row of collages 

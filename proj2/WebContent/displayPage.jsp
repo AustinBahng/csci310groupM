@@ -26,7 +26,7 @@
 			<h1 id="title">Collage for topic X</h1>
 			
 			<a id="saveButton">Save to History</a>
-			<a id="exportButtonTemp" download="test.jpeg" >Export</a>
+			<!-- <a id="exportButtonTemp" download="test.jpeg" >Export</a> -->
 			<a id="exportButton" onclick="prepareDownload()" download="test.jpeg" style="display: none;">Export</a>
 			<form id="exportAsOptions">
 				<input type="radio" name="exportAs" value="png" id="png" checked>PNG
@@ -47,15 +47,15 @@
 				<input type="text" id="inputBox" name="topic" placeholder="Enter topic" onkeyup="editingStopped()"/>
 				<input type="text" id="inputBoxShape" name="shape" placeholder="Enter collage Shape"/>
 				<select name="filters" id = "filterSelector">
-				    <option value="0">No Filter</option>
-				    <option value="1">B&W Filter</option>
-				    <option value="2">Greyscale Filter</option>
-				    <option value="3">Sepia Filter</option>
+				    <option  value="0">No Filter</option>
+				    <option  value="1">B&W Filter</option>
+				    <option  value="2">Greyscale Filter</option>
+				    <option  value="3">Sepia Filter</option>
 				</select>
-				<input type="checkbox" id="bordersCheckbox" name="borders" value="borders"/> Image borders
-				<input type="checkbox" id="rotationsCheckbox" name="rotation" value="rotation"/> Image rotations
-				<input type="text" id="inputBoxWidth" name="width" placeholder="Width (px)"/>
-				<input type="text" id="inputBoxHeight" name="height" placeholder="Height (px)"/>
+				<input type="checkbox" id="bordersCheckbox"  value="bordersOn"/> Image borders
+				<input type="checkbox" id="rotationsCheckbox"  value="rotationOn"/> Image rotations
+				<input type="text" id="inputBoxWidth" name="width" placeholder="Width (px)" value = "800"/>
+				<input type="text" id="inputBoxHeight" name="height" placeholder="Height (px)" value = "600"/>
 				<br>
 				<input type="Submit" id="submitButton" name="build" value="Build Another Collage" onclick= "return makeCollageRequest();" onsubmit="return makeCollageRequest();" disabled />
 			</form>

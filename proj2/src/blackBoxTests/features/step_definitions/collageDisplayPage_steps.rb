@@ -50,10 +50,10 @@ When(/^press the Build Another Collage button$/) do
   page.find_by_id("submitButton").click
 end
 
-Then(/^I should see the collage for topic "([^"]*)" generated$/) do |arg1|
-  sleep(numSecondsWait)
-  page.find('#mainCollage')['alt'].should have_content arg1
-end
+# Then(/^I should see the collage for topic "([^"]*)" generated$/) do |arg1|
+#   sleep(numSecondsWait)
+#   page.find('#mainCollage')['alt'].should have_content arg1
+# end
 
 Then(/^the outline color of the input box is dark gray$/) do
   page.find_by_id('inputBox').native.css_value('border').should have_content '2px solid rgb(105, 105, 105)'
@@ -128,8 +128,8 @@ Given(/^that a collage for topic "([^"]*)" has been generated and is currently b
 end
 
 Then(/^a scaled down version of "([^"]*)" and "([^"]*)" collages should appear in the previous collage picker$/) do |arg1, arg2|
-  page.find(:xpath, '//a[@id="galleryCollage-1"]/img')['alt'].should have_content arg1
-  page.find(:xpath, '//a[@id="galleryCollage-2"]/img')['alt'].should have_content arg2
+  page.find(:xpath, '//a[@id="galleryCollage-0"]/img')['alt'].should have_content arg1
+  page.find(:xpath, '//a[@id="galleryCollage-1"]/img')['alt'].should have_content arg2
 end
 
 Then(/^the collage for topic "([^"]*)" does not appear in the previous collage picker$/) do |arg1|
