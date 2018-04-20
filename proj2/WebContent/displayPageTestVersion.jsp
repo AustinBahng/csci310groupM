@@ -15,8 +15,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Build Another Collage</title>
-	<link rel="stylesheet" type="text/css" href="displayPageStyle.css">
-	<script src="displayScripts.js"></script>
+	<link rel="stylesheet" type="text/css" href="displayPageStyleTestVersion.css">
+	<script src="displayScriptsTestVersion.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
 	</head>
 	<body onload="loadFirstContent('<%= collageTitle%>','<%= collageImage%>','<%= isError%>')" >

@@ -138,10 +138,11 @@ img.galleryImage{
 }
 a.galleryLink{
 	height: 80px;
+	display: block;
 }
 div#galleryOuter{
 	width: 800px;
-	height: 100px;
+	height: 130px;
 	margin: 0 auto;
 	overflow: scroll;
 }
@@ -149,7 +150,7 @@ div#galleryInner{
 	overflow-x: scroll;
 	overflow-y: hidden;
 	white-space: nowrap;
-	height: 80px;
+	height: 110px;
 	padding-bottom: 10px;
 	margin: 0 auto;
 }
@@ -188,4 +189,15 @@ div#galleryInner{
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.deleteOption{
+	width: 20px;
+	margin-left: 5px;
+	display: block;
+}
+
+.galleryCollageDiv{
+	height: 100px;
+    display: inline-block;
 }

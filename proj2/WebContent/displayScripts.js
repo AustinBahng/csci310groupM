@@ -145,6 +145,7 @@ function loadFirstContent(title,imgData,isError){
 }
 
 function makeCollageRequest(){
+	hideCurrentCollage();
 	displayLoader();
 	console.log("MAKE REQUEST");
 	event.preventDefault();
@@ -231,9 +232,22 @@ function clickedSave(){
 	newCollageLink.id = ("galleryCollage-" + newCollageNum);
 	newCollageLink.className = "galleryLink";
 	newCollageLink.setAttribute("onclick","clickedGallery('" + newCollageNum + "')");
-	
 	newCollageLink.appendChild(newCollageImg);
-	galleryMainDiv.appendChild(newCollageLink);
+
+	newCollageDelete = document.createElement('a');
+	newCollageDelete.className = "deleteOption";
+	newCollageDelete.innerHTML = "DELETE";
+	newCollageDelete.setAttribute("onclick","deleteCollage('" + "galleryCollageDiv-" + newCollageNum + "')");
+	
+	tempDiv = document.createElement('div');
+	tempDiv.id = ("galleryCollageDiv-" + newCollageNum);
+	tempDiv.className = "galleryCollageDiv";
+	tempDiv.appendChild(newCollageLink);
+	tempDiv.appendChild(newCollageDelete);
+
+	console.log("APPENDING");
+	galleryMainDiv.appendChild(tempDiv);
+	//galleryMainDiv.appendChild(newCollageLink);
 
 	//After collage is added to the gallery, 
 	//'clicking it' to display on main collage and hide form gallery
@@ -249,4 +263,21 @@ function displayLoader(){
 function hideLoader(){
 	var loader = document.getElementById('loader');
 	loader.style.display = 'none';
+}
+
+function deleteCollage(divToDeleteId){
+	var divToDelete = document.getElementById(divToDeleteId);
+	divToDelete.parentNode.removeChild(divToDelete);
+}
+
+function hideCurrentCollage(){
+	var mainCollage = document.getElementById('mainCollage');
+	mainCollage.style.display = 'none';
+
+	var exportButton = document.getElementById('exportButton');
+	exportButton.style.display = 'none';
+
+	var insufficientImagesMsg = document.getElementById('insufficientImages');
+	insufficientImagesMsg.style.display = 'none';
+
 }
