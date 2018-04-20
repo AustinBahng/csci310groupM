@@ -25,7 +25,7 @@
 		<div id="header">
 			<h1 id="title">Collage for topic X</h1>
 			
-			<a id="saveButton" onclick="clickedSave()">Save to History</a>
+			<a id="saveButton">Save to History</a>
 			<!-- <a id="exportButtonTemp" download="test.jpeg" >Export</a> -->
 			<a id="exportButton" onclick="prepareDownload()" download="test.jpeg" style="display: none;">Export</a>
 			<form id="exportAsOptions">

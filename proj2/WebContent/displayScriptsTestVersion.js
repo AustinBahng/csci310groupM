@@ -84,13 +84,13 @@ function clickedGallery(divNum){
 	var galleryImages = galleryMainDiv.children;
 
 	//Going through all the collages in the gallery, displaying all but the one clicked
-	//	for(i=0; i<galleryImages.length;i++){
-	//		if(galleryImages[i].id == clickedImgId){
-	//			galleryImages[i].style.display = 'none';
-	//		} else{
-	//			galleryImages[i].style.display = 'inline-block';
-	//		}
-	//	}
+	for(i=0; i<galleryImages.length;i++){
+		if(galleryImages[i].id == clickedImgId){
+			galleryImages[i].style.display = 'none';
+		} else{
+			galleryImages[i].style.display = 'inline-block';
+		}
+	}
 
 	//Sending clicked collage to the main space
 	var clickedImgContainer = document.getElementById(clickedImgId);
@@ -187,56 +187,13 @@ function makeCollageRequest(){
 						title: imgTitle,
 						imageBase64: imgData
 				};
-				//addedNewCollage(imgObject);
-				console.log("NEW COLLAGE DISPLAY METHOD");
-				displayCollageInMainDiv(imgObject);
+				addedNewCollage(imgObject); 
 			} else {
 				displayErrorMsg(imgTitle);
 			}			
 		}
 	}
 	
-	return false;
-}
-
-
-function displayCollageInMainDiv(imgObject){
-	//Display main space and header in case error was prev displayed
-	displayMainCollageAndHeader();
-
-	var mainCollageImg = document.getElementById('mainCollage');
-	mainCollageImg.src = 'data:image/png;base64,' + imgObject.imageBase64;
-	mainCollage.alt = imgObject.title;
-	var collageTitle = document.getElementById('title');
-	var imgTopic = mainCollage.alt
-	collageTitle.innerHTML = ('Collage for topic ' + imgTopic);
-
-	return false;
-}
-
-function clickedSave(){
-	console.log("CLICKED SAVE");
 	
-	var mainCollageImg = document.getElementById('mainCollage');
-	var galleryMainDiv = document.getElementById('galleryInner');
-	var newCollageNum = galleryMainDiv.children.length;
-
-	newCollageImg = document.createElement('img');
-	newCollageImg.src = mainCollageImg.src
-	newCollageImg.className = 'galleryImage';
-	newCollageImg.alt = mainCollage.alt
-
-	newCollageLink = document.createElement('a');
-	newCollageLink.id = ("galleryCollage-" + newCollageNum);
-	newCollageLink.className = "galleryLink";
-	newCollageLink.setAttribute("onclick","clickedGallery('" + newCollageNum + "')");
-	
-	newCollageLink.appendChild(newCollageImg);
-	galleryMainDiv.appendChild(newCollageLink);
-
-	//After collage is added to the gallery, 
-	//'clicking it' to display on main collage and hide form gallery
-	clickedGallery(newCollageNum);
 	return false;
-	
 }
