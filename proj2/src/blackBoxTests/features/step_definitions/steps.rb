@@ -108,11 +108,11 @@ When("I select the greyscale filter") do
 end
 
 When("I select the rotations checkbox") do
-  check('rotation')
+  check('rotationsCheckbox')
 end
 
 When("I select the borders checkbox") do
-  check('borders')
+  check('bordersCheckbox')
 end
 
 When("I set height to {string}") do |string|
@@ -165,4 +165,22 @@ When("a collage for topic {string} with shape {string} is generated") do |string
   fill_in('inputBoxShape', :with => string2)
   find_field("inputBox").native.send_key(:enter)
   sleep(numSecondsWait)
+end
+
+Given("that I am on the Collage Display Page Test Version") do
+  visit "http://localhost:8080/proj2/displayPageTestVersion.jsp"
+end
+
+When("I try to create a collage for topic {string} and shape {string}") do |string, string2|
+  fill_in('inputBox', :with => string)
+  fill_in('inputBoxShape', :with => string2)
+  find_field("inputBox").native.send_key(:enter)
+end
+
+Then("a busy symbol appears") do
+  expect(page).to have_selector('#loader', visible: true)
+end
+
+Then("I should not see a busy symbol") do
+  expect(page).to have_selector('#loader', visible: false)
 end

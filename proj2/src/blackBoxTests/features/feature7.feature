@@ -1,7 +1,7 @@
 Feature: There should be a collage history gallery to display the previously saved collages
 
 Background:
-	Given that I am on the Collage Display Page
+	Given that I am on the Collage Display Page Test Version
 	And that a collage for topic "dogs" with shape "t" has been generated
 	And that a collage for topic "cats" with shape "t" has been generated
 	And that a collage for topic "birds" with shape "t" has been generated and is currently being displayed
