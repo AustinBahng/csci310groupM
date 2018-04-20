@@ -265,8 +265,7 @@ public class CollageBuilder {
 					BufferedImage img = ImageIO.read(httpcon.getInputStream());
 					if (imageResults.size() == numCalls * 10) {
 						break;
-					}
-					if (img != null) {
+					} else if (img != null) {
 						imageResults.add(img);
 					}
 
