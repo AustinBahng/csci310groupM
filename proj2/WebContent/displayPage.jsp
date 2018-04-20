@@ -38,7 +38,7 @@
 		<!-- mainSpace: contains either the main collage being displayed or the error msg -->
 		<div id="mainSpace">
 			<img id="mainCollage" src="" style="display: none" alt = "">
-			<div class="loader"></div>
+			<div class="loader" id="loader" style="display: none"></div>
 			<h2 id="insufficientImages" style="display: none">Insufficient number of images found</h2>
 		</div>
 

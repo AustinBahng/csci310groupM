@@ -145,6 +145,7 @@ function loadFirstContent(title,imgData,isError){
 }
 
 function makeCollageRequest(){
+	displayLoader();
 	console.log("MAKE REQUEST");
 	event.preventDefault();
 	var querry = document.getElementById("inputBox").value;
@@ -189,6 +190,7 @@ function makeCollageRequest(){
 				};
 				//addedNewCollage(imgObject);
 				console.log("NEW COLLAGE DISPLAY METHOD");
+				hideLoader();
 				displayCollageInMainDiv(imgObject);
 			} else {
 				displayErrorMsg(imgTitle);
@@ -198,7 +200,6 @@ function makeCollageRequest(){
 	
 	return false;
 }
-
 
 function displayCollageInMainDiv(imgObject){
 	//Display main space and header in case error was prev displayed
@@ -238,5 +239,16 @@ function clickedSave(){
 	//'clicking it' to display on main collage and hide form gallery
 	clickedGallery(newCollageNum);
 	return false;
-	
+}
+
+function displayLoader(){
+	console.log("DISPLAYING LOADER");
+	var loader = document.getElementById('loader');
+	loader.style.display = 'block';
+}
+
+function hideLoader(){
+	console.log("HIDING LOADER");
+	var loader = document.getElementById('loader');
+	loader.style.display = 'none';
 }
