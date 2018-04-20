@@ -38,7 +38,8 @@
 		<!-- mainSpace: contains either the main collage being displayed or the error msg -->
 		<div id="mainSpace">
 			<img id="mainCollage" src="" style="display: none" alt = "">
-			<h2 id="insufficientImages">Insufficient number of images found</h2>
+			<div class="loader"></div>
+			<h2 id="insufficientImages" style="display: none">Insufficient number of images found</h2>
 		</div>
 
 		<!-- newInput: contains the inputBox and the buildAnotherCollageButton -->
