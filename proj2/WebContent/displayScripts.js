@@ -140,7 +140,7 @@ function loadFirstContent(title,imgData,isError){
        	};
        	addedNewCollage(newImg);   		
     } else {
-    	displayErrorMsg(title);
+    	//displayErrorMsg(title);
     }
 }
 
@@ -189,10 +189,10 @@ function makeCollageRequest(){
 						imageBase64: imgData
 				};
 				//addedNewCollage(imgObject);
-				console.log("NEW COLLAGE DISPLAY METHOD");
 				hideLoader();
 				displayCollageInMainDiv(imgObject);
 			} else {
+				hideLoader();
 				displayErrorMsg(imgTitle);
 			}			
 		}
@@ -242,13 +242,11 @@ function clickedSave(){
 }
 
 function displayLoader(){
-	console.log("DISPLAYING LOADER");
 	var loader = document.getElementById('loader');
 	loader.style.display = 'block';
 }
 
 function hideLoader(){
-	console.log("HIDING LOADER");
 	var loader = document.getElementById('loader');
 	loader.style.display = 'none';
 }
