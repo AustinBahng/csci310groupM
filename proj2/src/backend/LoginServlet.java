@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 
     String state = new BigInteger(130, new SecureRandom()).toString(32);  // prevent request forgery
     req.getSession().setAttribute("state", state);
-    req.getSession().setAttribute("loginDestination", "/displayPage.jsp");
+    req.getSession().setAttribute("loginDestination", "http://localhost:8080/proj2/displayPage.jsp");
 
     flow = new GoogleAuthorizationCodeFlow.Builder(
         HTTP_TRANSPORT,
@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
     // Callback url should be the one registered in Google Developers Console
     String url =
         flow.newAuthorizationUrl()
-            .setRedirectUri("http://localhost:8080/proj2/displayPage.jsp")
+            .setRedirectUri("http://localhost:8080/proj2/oauth2callback")
             .setState(state)            // Prevent request forgery
             .build();
     resp.sendRedirect(url);

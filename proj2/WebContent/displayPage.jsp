@@ -13,6 +13,26 @@
 		System.out.println(isError);
 	%>
 <head>
+	<% String email = (String) session.getAttribute("userEmail"); %>
+    <script>var userEmail = "<%= email %>";
+    		userEmail = userEmail.replace('.','');
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+    <script>
+     // Initialize Firebase
+     var config = {
+       apiKey: "AIzaSyC0nFznKiscqjJE7dEoqTBwu9B56vS0K9Q",
+       authDomain: "scollage-1518808487069.firebaseapp.com",
+       databaseURL: "https://scollage-1518808487069.firebaseio.com",
+       projectId: "scollage-1518808487069",
+       storageBucket: "scollage-1518808487069.appspot.com",
+       messagingSenderId: "727805399128"
+     };
+     firebase.initializeApp(config);
+     var database = firebase.database();
+    </script>
 	<meta charset="UTF-8">
 	<title>Build Another Collage</title>
 	<link rel="stylesheet" type="text/css" href="displayPageStyle.css">

@@ -1,3 +1,57 @@
+function pushToDB(){
+    var size = document.getElementById('galleryInner').children.length;
+    var arr = [];
+    for(i = 0; i < size; i++){
+        var wrapper = document.getElementById("galleryCollage-" + i);
+        var collage = wrapper.children[0];
+        var img = {title:collage.alt,imageBase64:collage.src.substring(22)};
+        arr.push(img);
+    }
+    firebase.database().ref('users/' + userEmail.substring(0, userEmail.indexOf('@'))).set({
+        imageObject: arr
+      });
+    console.log("SAVING");
+};
+
+function pullFromDB(){
+	console.log("Pulling from DB");
+	var ref = firebase.database().ref("users/" + userEmail.substring(0, userEmail.indexOf('@')));
+	ref.on("value", function(snapshot) {
+		snapshot.forEach(function(childSnapshot){
+			var img = childSnapshot.val();
+			
+			for(i = 0; i < img.length; i++){
+				var galleryMainDiv = document.getElementById('galleryInner');
+				var newCollageNum = galleryMainDiv.children.length;
+
+				newCollageImg = document.createElement('img');
+				newCollageImg.src = 'data:image/png;base64,' + img[i].imageBase64;
+				newCollageImg.className = 'galleryImage';
+				newCollageImg.alt = img[i].title
+
+				newCollageLink = document.createElement('a');
+				newCollageLink.id = ("galleryCollage-" + newCollageNum);
+				newCollageLink.className = "galleryLink";
+				newCollageLink.setAttribute("onclick","clickedGallery('" + newCollageNum + "')");
+				newCollageLink.appendChild(newCollageImg);
+
+				newCollageDelete = document.createElement('a');
+				newCollageDelete.className = "deleteOption";
+				newCollageDelete.innerHTML = "DELETE";
+				newCollageDelete.setAttribute("onclick","deleteCollage('" + "galleryCollageDiv-" + newCollageNum + "')");
+				
+				tempDiv = document.createElement('div');
+				tempDiv.id = ("galleryCollageDiv-" + newCollageNum);
+				tempDiv.className = "galleryCollageDiv";
+				tempDiv.appendChild(newCollageLink);
+				tempDiv.appendChild(newCollageDelete);
+
+				galleryMainDiv.appendChild(tempDiv);
+			}
+		});
+	});
+}
+
 //User stopped writing on input box, disables button if there is no test 
 function editingStopped(){
     if(document.getElementById('inputBox').value.trim().length > 0) { 
@@ -133,6 +187,7 @@ function loadFirstContent(title,imgData,isError){
     console.log(title);
     console.log(imgData);
     console.log(isError);
+    pullFromDB();
     if(isError == 'true'){
     	newImg = {
        			title: title,
@@ -252,6 +307,7 @@ function clickedSave(){
 	//After collage is added to the gallery, 
 	//'clicking it' to display on main collage and hide form gallery
 	clickedGallery(newCollageNum);
+	pushToDB();
 	return false;
 }
 
@@ -266,8 +322,12 @@ function hideLoader(){
 }
 
 function deleteCollage(divToDeleteId){
+	console.log("DELETING");
+	console.log(document.getElementById('galleryInner').children.length);
 	var divToDelete = document.getElementById(divToDeleteId);
 	divToDelete.parentNode.removeChild(divToDelete);
+	console.log(document.getElementById('galleryInner').children.length);
+	pushToDB();
 }
 
 function hideCurrentCollage(){
