@@ -185,6 +185,9 @@
         <dependent-module archiveName="google-http-client-1.17.0-rc.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/rblay/Desktop/USC/201801 - Spring/CSCI-310/project2/csci310groupM/proj2/google lib/google-http-client-1.17.0-rc.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="jackson-annotations-2.1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib//Users/rblay/Desktop/USC/201801 - Spring/CSCI-310/project2/csci310groupM/proj2/google lib/jackson-annotations-2.1.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="proj2"/>
         <property name="java-output-path" value="/proj2/build/classes"/>
     </wb-module>

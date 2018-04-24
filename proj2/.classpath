@@ -74,5 +74,6 @@
 	<classpathentry kind="lib" path="google lib/transaction-api-1.1.jar"/>
 	<classpathentry kind="lib" path="google lib/xpp3-1.1.4c-sources.jar"/>
 	<classpathentry kind="lib" path="google lib/xpp3-1.1.4c.jar"/>
+	<classpathentry kind="lib" path="google lib/jackson-annotations-2.1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

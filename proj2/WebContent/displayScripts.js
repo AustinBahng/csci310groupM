@@ -19,35 +19,39 @@ function pullFromDB(){
 	ref.on("value", function(snapshot) {
 		snapshot.forEach(function(childSnapshot){
 			var img = childSnapshot.val();
-			
-			for(i = 0; i < img.length; i++){
-				var galleryMainDiv = document.getElementById('galleryInner');
-				var newCollageNum = galleryMainDiv.children.length;
+			var galleryMainDiv = document.getElementById('galleryInner');
+			var numElementsInDiv = galleryMainDiv.children.length;
+			if(numElementsInDiv <= 0){
+				for(i = 0; i < img.length; i++){
+					var galleryMainDiv = document.getElementById('galleryInner');
+					var newCollageNum = galleryMainDiv.children.length;
 
-				newCollageImg = document.createElement('img');
-				newCollageImg.src = 'data:image/png;base64,' + img[i].imageBase64;
-				newCollageImg.className = 'galleryImage';
-				newCollageImg.alt = img[i].title
+					newCollageImg = document.createElement('img');
+					newCollageImg.src = 'data:image/png;base64,' + img[i].imageBase64;
+					newCollageImg.className = 'galleryImage';
+					newCollageImg.alt = img[i].title
 
-				newCollageLink = document.createElement('a');
-				newCollageLink.id = ("galleryCollage-" + newCollageNum);
-				newCollageLink.className = "galleryLink";
-				newCollageLink.setAttribute("onclick","clickedGallery('" + newCollageNum + "')");
-				newCollageLink.appendChild(newCollageImg);
+					newCollageLink = document.createElement('a');
+					newCollageLink.id = ("galleryCollage-" + newCollageNum);
+					newCollageLink.className = "galleryLink";
+					newCollageLink.setAttribute("onclick","clickedGallery('" + newCollageNum + "')");
+					newCollageLink.appendChild(newCollageImg);
 
-				newCollageDelete = document.createElement('a');
-				newCollageDelete.className = "deleteOption";
-				newCollageDelete.innerHTML = "DELETE";
-				newCollageDelete.setAttribute("onclick","deleteCollage('" + "galleryCollageDiv-" + newCollageNum + "')");
-				
-				tempDiv = document.createElement('div');
-				tempDiv.id = ("galleryCollageDiv-" + newCollageNum);
-				tempDiv.className = "galleryCollageDiv";
-				tempDiv.appendChild(newCollageLink);
-				tempDiv.appendChild(newCollageDelete);
+					newCollageDelete = document.createElement('a');
+					newCollageDelete.className = "deleteOption";
+					newCollageDelete.innerHTML = "DELETE";
+					newCollageDelete.setAttribute("onclick","deleteCollage('" + "galleryCollageDiv-" + newCollageNum + "')");
+					
+					tempDiv = document.createElement('div');
+					tempDiv.id = ("galleryCollageDiv-" + newCollageNum);
+					tempDiv.className = "galleryCollageDiv";
+					tempDiv.appendChild(newCollageLink);
+					tempDiv.appendChild(newCollageDelete);
 
-				galleryMainDiv.appendChild(tempDiv);
+					galleryMainDiv.appendChild(tempDiv);
+				}		
 			}
+			
 		});
 	});
 }
@@ -160,7 +164,7 @@ function clickedGallery(divNum){
 }
 
 //Functionality for when a new collage is added
-function addedNewCollage(imgObject){
+function addedNewCollage(imgObject){	
 	var galleryMainDiv = document.getElementById('galleryInner');
 	var newCollageNum = galleryMainDiv.children.length;
 
@@ -193,7 +197,7 @@ function loadFirstContent(title,imgData,isError){
        			title: title,
        			imageBase64: imgData
        	};
-       	addedNewCollage(newImg);   		
+       	//addedNewCollage(newImg);   		
     } else {
     	//displayErrorMsg(title);
     }
@@ -288,7 +292,7 @@ function clickedSave(){
 	newCollageLink.className = "galleryLink";
 	newCollageLink.setAttribute("onclick","clickedGallery('" + newCollageNum + "')");
 	newCollageLink.appendChild(newCollageImg);
-
+	
 	newCollageDelete = document.createElement('a');
 	newCollageDelete.className = "deleteOption";
 	newCollageDelete.innerHTML = "DELETE";
@@ -306,7 +310,7 @@ function clickedSave(){
 
 	//After collage is added to the gallery, 
 	//'clicking it' to display on main collage and hide form gallery
-	clickedGallery(newCollageNum);
+	renameCollagesInGallery();
 	pushToDB();
 	return false;
 }
@@ -327,6 +331,7 @@ function deleteCollage(divToDeleteId){
 	var divToDelete = document.getElementById(divToDeleteId);
 	divToDelete.parentNode.removeChild(divToDelete);
 	console.log(document.getElementById('galleryInner').children.length);
+	renameCollagesInGallery();
 	pushToDB();
 }
 
@@ -339,5 +344,22 @@ function hideCurrentCollage(){
 
 	var insufficientImagesMsg = document.getElementById('insufficientImages');
 	insufficientImagesMsg.style.display = 'none';
+}
 
+function renameCollagesInGallery(){
+	var galleryMainDiv = document.getElementById('galleryInner');
+	var numCollages = galleryMainDiv.children.length;
+	
+	for(i = 0; i < numCollages; i++){
+		var tempDiv = galleryMainDiv.children[i];
+		tempDiv.id = ("galleryCollageDiv-" + i);
+		
+		var tempLinkImg = tempDiv.children[0];
+		tempLinkImg.id = ("galleryCollage-" + i);
+		tempLinkImg.setAttribute("onclick","clickedGallery('" + i + "')");
+		
+		var tempLinkDelete = tempDiv.children[1];
+		tempLinkDelete.setAttribute("onclick","deleteCollage('" + "galleryCollageDiv-" + i + "')"); 
+		
+	}	
 }
