@@ -57,8 +57,13 @@ input[type=text]{
 #exportAsOptions{
 	/*CSS for export options radio buttons*/
 	/*float: right;*/
-	padding-right: 180px;
-	padding-left: 925px;
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-top: 30px;
+	
+	right: 13%;
+	margin-top: -50px;
+	position: absolute;
 }
 
 #exportButtonTemp{

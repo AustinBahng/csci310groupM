@@ -295,7 +295,7 @@ Then("the image has a BW filter") do
     canvas.width = img.width;
     var context = canvas.getContext('2d')
     context.drawImage(img,0,0)
-    var imgValue = context.getImageData( 0, 0, img.width, img.height );
+    var imgValue = context.getImageData( 0, 0, img.width, img.height);
     var imgData = imgValue.data;
 
     var validImage = 1;

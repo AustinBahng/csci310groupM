@@ -74,7 +74,7 @@ function prepareDownload(){
 	canvas.height = img.height;
 	canvas.width = img.width;
 	context = canvas.getContext('2d');
-	context.drawImage(img, 0, 0, 300, 300);
+	context.drawImage(img, 0, 0, img.width, img.height);
 	var newImg = canvas.toDataURL('image.png');
 	
 	//Check radio button to see if we should export the image to PDF or PNG
