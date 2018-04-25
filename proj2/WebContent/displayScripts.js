@@ -296,6 +296,7 @@ function clickedSave(){
 	newCollageDelete = document.createElement('a');
 	newCollageDelete.className = "deleteOption";
 	newCollageDelete.innerHTML = "DELETE";
+	newCollageDelete.id = "deleteCollage-" + newCollageNum;
 	newCollageDelete.setAttribute("onclick","deleteCollage('" + "galleryCollageDiv-" + newCollageNum + "')");
 	
 	tempDiv = document.createElement('div');
@@ -360,6 +361,7 @@ function renameCollagesInGallery(){
 		
 		var tempLinkDelete = tempDiv.children[1];
 		tempLinkDelete.setAttribute("onclick","deleteCollage('" + "galleryCollageDiv-" + i + "')"); 
+		newCollageDelete.id = "deleteCollage-" + i;
 		
 	}	
 }

@@ -200,3 +200,171 @@ end
 Then("the collage for topic {string} should not appear in the previous collage picker") do |string|
   expect(page).not_to have_selector('#collageGalleryDiv-0')
 end
+
+Then("the image has no filter") do
+  pixelAnalysisValue = page.driver.evaluate_script <<-EOS
+  function(){
+    var img = document.getElementById('mainCollage')
+
+    var canvas = document.createElement( 'canvas' );
+    canvas.height = img.height;
+    canvas.width = img.width;
+    var context = canvas.getContext('2d')
+    context.drawImage(img,0,0)
+    var imgValue = context.getImageData( 0, 0, img.width, img.height );
+    var imgData = imgValue.data;
+
+    var validImage = 0;
+    for(i = 0; i<imgData.length; i += 4){
+      var r = imgData[i];
+      var g = imgData[i+1];
+      var b = imgData[i+2];
+
+      if(r >= 0 && r <= 255){
+        validImage = 1;
+        break;
+      }
+
+      if(g >= 0 && g <= 255){
+        validImage = 1;
+        break;
+      }
+
+      if(b >= 0 && b <= 255){
+        validImage = 1;
+        break;
+      }
+    }
+
+    return validImage;
+  }();
+ EOS
+
+ pixelAnalysisValue == 1
+end
+
+Then("the image has a sepia filter") do
+  pixelAnalysisValue = page.driver.evaluate_script <<-EOS
+  function(){
+    var img = document.getElementById('mainCollage')
+
+    var canvas = document.createElement( 'canvas' );
+    canvas.height = img.height;
+    canvas.width = img.width;
+    var context = canvas.getContext('2d')
+    context.drawImage(img,0,0)
+    var imgValue = context.getImageData( 0, 0, img.width, img.height );
+    var imgData = imgValue.data;
+
+    var validImage = 0;
+    for(i = 0; i<imgData.length; i += 4){
+      var r = imgData[i];
+      var g = imgData[i+1];
+      var b = imgData[i+2];
+
+      if(r >= 0 && r <= 255){
+        validImage = 1;
+        break;
+      }
+
+      if(g >= 0 && g <= 255){
+        validImage = 1;
+        break;
+      }
+
+      if(b >= 0 && b <= 255){
+        validImage = 1;
+        break;
+      }
+    }
+
+    return validImage;
+  }();
+ EOS
+
+ pixelAnalysisValue == 1
+end
+
+Then("the image has a BW filter") do
+  pixelAnalysisValue = page.driver.evaluate_script <<-EOS
+  function(){
+    var img = document.getElementById('mainCollage')
+
+    var canvas = document.createElement( 'canvas' );
+    canvas.height = img.height;
+    canvas.width = img.width;
+    var context = canvas.getContext('2d')
+    context.drawImage(img,0,0)
+    var imgValue = context.getImageData( 0, 0, img.width, img.height );
+    var imgData = imgValue.data;
+
+    var validImage = 1;
+    for(i = 0; i<imgData.length; i += 4){
+      var r = imgData[i];
+      var g = imgData[i+1];
+      var b = imgData[i+2];
+
+      if(r > 0 && r < 255){
+        validImage = 0;
+        break;
+      }
+
+      if(g > 0 && g < 255){
+        validImage = 0;
+        break;
+      }
+
+      if(b > 0 && b < 255){
+        validImage = 0;
+        break;
+      }
+    }
+
+    return validImage;
+  }();
+ EOS
+
+ pixelAnalysisValue == 1
+end
+
+Then("the image has a Greyscale filter") do
+  pixelAnalysisValue = page.driver.evaluate_script <<-EOS
+  function(){
+    var img = document.getElementById('mainCollage')
+
+    var canvas = document.createElement( 'canvas' );
+    canvas.height = img.height;
+    canvas.width = img.width;
+    var context = canvas.getContext('2d')
+    context.drawImage(img,0,0)
+    var imgValue = context.getImageData( 0, 0, img.width, img.height );
+    var imgData = imgValue.data;
+
+    var validImage = 0;
+    for(i = 0; i<imgData.length; i += 4){
+      var r = imgData[i];
+      var g = imgData[i+1];
+      var b = imgData[i+2];
+
+      if(r >= 0 && r <= 255){
+        validImage = 1;
+        break;
+      }
+
+      if(g >= 0 && g <= 255){
+        validImage = 1;
+        break;
+      }
+
+      if(b >= 0 && b <= 255){
+        validImage = 1;
+        break;
+      }
+    }
+
+    return validImage;
+  }();
+ EOS
+
+ pixelAnalysisValue == 1
+end
