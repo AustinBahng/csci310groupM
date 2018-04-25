@@ -184,3 +184,19 @@ end
 Then("I should not see a busy symbol") do
   expect(page).to have_selector('#loader', visible: false)
 end
+
+When("I clicked the save button") do
+  page.find_by_id("saveButton").click
+end
+
+Then("the collage for topic {string} appear in the previous collage picker") do |string|
+  expect(page).to have_selector('#galleryCollageDiv-0',)
+end
+
+When("I delete the built Collage") do
+  page.find_by_id("deleteCollage-0").click
+end
+
+Then("the collage for topic {string} should not appear in the previous collage picker") do |string|
+  expect(page).not_to have_selector('#collageGalleryDiv-0')
+end
