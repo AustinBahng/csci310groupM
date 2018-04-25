@@ -43,7 +43,7 @@
 		
 		<!-- header: contains the title and export button -->
 		<div id="header">
-			<h1 id="title">Collage for topic X</h1>
+			<h1 id="title">SCOLLAGE</h1>
 			
 			<a id="saveButton" onclick="clickedSave()">Save to History</a>
 			<!-- <a id="exportButtonTemp" download="test.jpeg" >Export</a> -->
