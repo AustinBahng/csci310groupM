@@ -51,7 +51,8 @@ public class CollageBuilderTest {
 	@Test
 	public void testInvalidBuildCollage() {
 		CollageBuilder cb = new CollageBuilder();
-		Collage test = cb.buildCollage("asdfuig2ior79iu73t9aosdufoogaowiurg23f3ougaef2jkasdhfiu", "dog", 0, 1, 1, 800, 600);
+		Collage test = cb.buildCollage("asdfuig2ior79iu73t9aosdufoogaowiurg23f3ougaef2jkasdhfiu", "dog", 0, 1, 1, 800,
+				600);
 		assertFalse(test.getDisplay());
 	}
 
@@ -88,17 +89,18 @@ public class CollageBuilderTest {
 	public void testUpperGenerateRandomAngle() {
 		CollageBuilder cb = new CollageBuilder();
 		int rand = 0;
-		for (int i = 0; i < 100; i++) {
-			rand = cb.generateRandomAngle();
-			assertTrue(rand <= 45);
-		}
+		rand = cb.generateRandomAngle();
+		Boolean check = (rand <= 45);
+		assertTrue(check);
 	}
 
 	@Test
 	public void testLowerGenerateRandomAngle() {
 		CollageBuilder cb = new CollageBuilder();
-		int rand = cb.generateRandomAngle();
-		assertTrue(rand >= -45);
+		int rand = 0;
+		rand = cb.generateRandomAngle();
+		Boolean check = (rand >= -45);
+		assertTrue(check);
 	}
 
 	@Test
@@ -152,8 +154,52 @@ public class CollageBuilderTest {
 
 	@Test
 	public void testGreyscaleFilter() {
-		BufferedImage testImg = new BufferedImage(50, 50, BufferedImage.TYPE_INT_ARGB);
-		BufferedImage testImg2 = CollageBuilder.toGreyscale(testImg);
-		assertNotSame(testImg, testImg2);
+		CollageBuilder cb = new CollageBuilder();
+		Collage test1 = cb.buildCollage("dog", "dog", 2, 1, 1, 800, 600);
+		Collage test2 = cb.buildCollage("dog", "dog", 0, 1, 1, 800, 600);
+
+		assertNotSame(test1, test2);
+	}
+
+	@Test
+	public void testCreateCollageWithSepiaFilterBordersAndRotations() {
+		CollageBuilder cb = new CollageBuilder();
+		Collage test = cb.buildCollage("dog", "dog", 1, 1, 1, 800, 600);
+		assertTrue(test.getDisplay());
+	}
+
+	@Test
+	public void testCreateCollageWithGreyscaleFilterBordersAndRotations() {
+		CollageBuilder cb = new CollageBuilder();
+		Collage test = cb.buildCollage("dog", "dog", 2, 1, 1, 800, 600);
+		assertTrue(test.getDisplay());
+	}
+
+	@Test
+	public void testCreateCollageWithBWFilterBordersAndRotations() {
+		CollageBuilder cb = new CollageBuilder();
+		Collage test = cb.buildCollage("dog", "dog", 3, 1, 1, 800, 600);
+		assertTrue(test.getDisplay());
+	}
+
+	@Test
+	public void testCreateCollageWithSepiaFilterNoBordersAndNoRotations() {
+		CollageBuilder cb = new CollageBuilder();
+		Collage test = cb.buildCollage("blue", "t", 1, 0, 0, 800, 600);
+		assertTrue(test.getDisplay());
+	}
+
+	@Test
+	public void testCreateCollageWithGreyscaleFilterNoBordersAndNoRotations() {
+		CollageBuilder cb = new CollageBuilder();
+		Collage test = cb.buildCollage("dog", "t", 2, 0, 0, 800, 600);
+		assertTrue(test.getDisplay());
+	}
+
+	@Test
+	public void testCreateCollageWithBWFilterNoBordersAndNoRotations() {
+		CollageBuilder cb = new CollageBuilder();
+		Collage test = cb.buildCollage("dog", "t", 3, 0, 0, 800, 600);
+		assertTrue(test.getDisplay());
 	}
 }

@@ -372,9 +372,10 @@ public class CollageBuilder {
 			if (g > 255) {
 				g = 255;
 			}
-			if (b > 255) {
-				b = 255;
-			}
+
+			// if (b > 255) {
+			// b = 255;
+			// }
 
 			// Darken blue color to increase sepia effect
 			b -= 20;
@@ -382,9 +383,6 @@ public class CollageBuilder {
 			// normalize if out of bounds
 			if (b < 0) {
 				b = 0;
-			}
-			if (b > 255) {
-				b = 255;
 			}
 
 			imagePixels[i] = (color & 0xff000000) + (r << 16) + (g << 8) + b;
