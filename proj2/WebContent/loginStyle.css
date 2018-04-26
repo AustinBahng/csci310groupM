@@ -1,0 +1,21 @@
+body{
+	background-color: #8FB8DE;
+	
+}
+
+#loginButton{
+	text-align: center;
+	width: 200px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	-webkit-appearance: none;
+	font-size: 30px;
+	border-radius: 5%;
+	font-family: system-ui;
+}
+
+#input{
+	text-align: center;
+	margin-top: 320px;
+	
+}
